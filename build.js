@@ -1,9 +1,29 @@
-const FACTORS = require('./factors');
-const COLUMNS = require('./columns');
 const csv = require('csv');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
+
+function round(val) {
+  return Math.round(val*1e+12)/1e+12;
+};
+
+function readFactors() {
+  var map = new Map();
+  return new Promise((fres) => {
+    var stream = fs.createReadStream('factors.csv').pipe(csv.parse({columns: true, comment: '#'}));
+    stream.on('data', (r) => map.set(r.code, r.factor));
+    stream.on('end', () => fres(map));
+  });
+};
+
+function readColumns() {
+  var map = new Map();
+  return new Promise((fres) => {
+    var stream = fs.createReadStream('columns.csv').pipe(csv.parse({columns: true, comment: '#'}));
+    stream.on('data', (r) => map.set(r.code, r.actual));
+    stream.on('end', () => fres(map));
+  });
+};
 
 var dat = {
   code: [],
@@ -13,14 +33,11 @@ var dat = {
 };
 var di = 0;
 var map = new Map();
-var nxtAll = [];
+var factors = new Map();
+var columns = new Map();
 
-function round(val) {
-  return Math.round(val*1e+12)/1e+12;
-};
-
-function valParse(val, k) {
-  var z = (parseFloat(val)||0)*FACTORS.get(k);
+function valParse(val, code) {
+  var z = (parseFloat(val)||0)*factors.get(code);
   return round(z);
 };
 
@@ -52,7 +69,7 @@ function csvReadRow(row) {
   dat.regn[i] = parseInt(row.regn.trim(), 10);
   for(var k in row) {
     if(k==='code' || k==='name' || k==='scie' || k==='regn') continue;
-    var val = row[k].trim().split('±'), kt = COLUMNS.get(k)||k;
+    var val = row[k].trim().split('±'), kt = columns.get(k)||k;
     if(!dat[kt]) { dat[kt] = []; dat[kt+'_e'] = []; }
     dat[kt][i] = valParse(val[0]||'0', k);
     dat[kt+'_e'][i] = valParse(val[1]||'0', k);
@@ -150,12 +167,13 @@ function combinedColumns(d) {
   }
 };
 
-var pth = 'assets';
-for(var fil of fs.readdirSync(pth)) {
-  nxtAll.push(csvRead(path.join(pth, fil)));
-}
-Promise.all(nxtAll).then(() => {
-  nullToZero(dat); combinedColumns(dat);
+async function build() {
+  factors = await readFactors();
+  columns = await readColumns();
+  for(var file of fs.readdirSync('assets'))
+    await csvRead(path.join('assets', file));
+  nullToZero(dat);
+  combinedColumns(dat);
   var ks = Object.keys(dat), z = ks.join()+os.EOL;
   for(var i=0; i<di; i++) {
     for(var k of ks) {
@@ -165,4 +183,5 @@ Promise.all(nxtAll).then(() => {
     z = z.substring(0, z.length-1)+os.EOL;
   }
   fs.writeFileSync('index.csv', z);
-});
+};
+build();
