@@ -25,15 +25,15 @@ function setupIndex() {
     this.field('code');
     this.field('name');
     this.field('scie');
-    this.field('desc');
+    this.field('lang');
     this.field('grup');
     for(var r of corpus.values()) {
-      var {code, name, scie, desc, grup} = r;
+      var {code, name, scie, lang, grup} = r;
       name = name.replace(/^(\w+),/g, '$1 $1 $1 $1,');
-      desc = desc.replace(/^\[.*\]$/g).replace(/ā/g, 'a').replace(/ḍ/g, 'd').replace(/ī/g, 'i');
-      desc = desc.replace(/ḷ/g, 'l').replace(/ṃ/g, 'm').replace(/ṇ/g, 'n').replace(/ṅ/g, 'n');
-      desc = desc.replace(/\w+\.\s([\w\',\/\(\)\- ]+)[;\.]?/g, '$1').replace(/[,\/\(\)\- ]+/g, ' ');
-      this.add({code, name, scie, desc, grup});
+      lang = lang.replace(/^\[.*\]$/g).replace(/ā/g, 'a').replace(/ḍ/g, 'd').replace(/ī/g, 'i');
+      lang = lang.replace(/ḷ/g, 'l').replace(/ṃ/g, 'm').replace(/ṇ/g, 'n').replace(/ṅ/g, 'n');
+      lang = lang.replace(/\w+\.\s([\w\',\/\(\)\- ]+)[;\.]?/g, '$1').replace(/[,\/\(\)\- ]+/g, ' ');
+      this.add({code, name, scie, lang, grup});
     }
   });
 };

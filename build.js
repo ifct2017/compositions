@@ -31,7 +31,7 @@ var dat = {
   code: [],
   name: [],
   scie: [],
-  desc: [],
+  lang: [],
   grup: [],
   regn: []
 };
@@ -70,7 +70,7 @@ function csvReadRow(row) {
   dat.code[i] = cod;
   dat.name[i] = old && dat.name[i].length>nam.length? dat.name[i]:nam;
   dat.scie[i] = old && dat.scie[i].length>sci.length? dat.scie[i]:sci;
-  dat.desc[i] = (descriptions.corpus.get(cod)||{desc: ''}).desc;
+  dat.lang[i] = (descriptions.corpus.get(cod)||{desc: ''}).desc;
   dat.grup[i] = groups.corpus.get(cod[0]).group;
   dat.regn[i] = parseInt(row.regn.trim(), 10);
   for(var k in row) {
