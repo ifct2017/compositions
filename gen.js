@@ -1,8 +1,8 @@
-const factors = require('./factors');
+const columns = require('./columns');
 const fs = require('fs');
 const os = require('os');
 
-var z = `code,factor${os.EOL}`;
-for(var [k, v] of factors)
-  z += `${k},${v.toExponential().replace('1e+0', '1')}${os.EOL}`;
-fs.writeFileSync('factors.csv', z);
+var z = `code,actual${os.EOL}`;
+for(var [k, v] of columns)
+  z += `${k},${v}${os.EOL}`;
+fs.writeFileSync('columns.csv', z);
