@@ -1,0 +1,27 @@
+{
+  "name": "@ifct2017/compositions",
+  "version": "0.2.3",
+  "description": "Food compositions in Indian Food Composition Tables 2017.",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifct2017/compositions.git"
+  },
+  "keywords": [
+    "ifct",
+    "2017",
+    "compositions"
+  ],
+  "author": "wolfram77@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ifct2017/compositions/issues"
+  },
+  "homepage": "https://github.com/ifct2017/compositions#readme",
+  "devDependencies": {
+    "csv": "^2.0.0"
+  }
+}

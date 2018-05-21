@@ -1,0 +1,40 @@
+# Indian Food Composition Tables 2017
+# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
+#
+# Copyright  © 2017 by National Institute of Nutrition
+# Indian Council of Medical Research
+# Department of Health Research Ministry of Health and Family Welfare, Government of India
+# Jamai Osmania (PO), Hyderabad – 500 007
+# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
+#
+# FATTY ACID PROFILE OF EDIBLE OILS AND FATS
+# (All values are expressed in %; All blank space in the table represent below detectable limit)
+# - Food Code
+# - Oil Name
+# - No. of Regions
+# - Butyric (C4:0) [%]
+# - Caproic (C6:0) [%]
+# - Caprylic (C8:0) [%]
+# - Capric (C10:0) [%]
+# - Lauric (C12:0) [%]
+# - Myristic (C14:0) [%]
+# - Palmitic (C16:0) [%]
+# - Stearic (C18:0) [%]
+# - Arachidic (C20:0) [%]
+# - Behenic (C22:0) [%]
+# - Lignoceric (C24:0) [%]
+code,name,regn,tf4d0,tf6d0,tf8d0,tf10d0,tf12d0,tf14d0,tf16d0,tf18d0,tf20d0,tf22d0,tf24d0
+T001,Coconut oil,1,,,2.76±0.37,5.18±0.20,49.57±0.81,21.12±0.67,9.26±0.39,2.97±0.23,,,
+T002,Corn oil,1,,,,,,,12.94,2.12,0.68,0.39,0.47
+T003,Cotton seed oil,1,,,,,,0.91,23.4,2.79,0.42,0.34,0.31
+T004,Gingelly oil,6,,,,,,,9.34±0.57,5.75±0.40,0.67±0.05,0.25±0.04,0.22±0.07
+T005,Groundnut oil,5,,,,,,,10.27±0.72,3.38±0.08,1.39±0.13,2.66±0.32,1.25±0.13
+T006,Mustard oil,6,,,,,,,2.18±0.10,1.17±0.02,0.98±0.02,1.39±0.04,
+T007,Palm oil,4,,,,,,,39.79±0.57,4.24±0.09,,,
+T008,Rice bran oil,5,,,,,,0.29±0.15,19.51±0.89,2.03±0.05,1.03±0.51,0.33±0.04,0.51±0.04
+T009,Safflower oil,1,,,,,,0.18±0.10,6.24±0.53,2.35±0.16,0.26±0.06,0.17±0.05,
+T010,Safflower oil (blended),4,,,,,,,15.71±0.48,2.28±0.08,0.83±0.33,0.31±0.04,0.40±0.03
+T011,Soyabean oil,6,,,,,,,11.51±0.38,4.08±0.58,0.37±0.02,,
+T012,Sunflower oil,6,,,,,,,6.43±0.18,3.69±0.07,0.32±0.04,0.66±0.03,0.29±0.04
+T013,Ghee,6,0.22±0.08,0.30±0.13,0.47±0.20,1.87±0.34,2.81±0.38,11.81±0.57,39.13±1.15,13.89±1.17,0.52±0.12,,
+T014,Vanaspati,6,,,,,0.37±0.05,1.19±0.05,53.10±1.55,5.98±0.44,0.81±0.07,,

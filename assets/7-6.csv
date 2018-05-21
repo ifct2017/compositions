@@ -1,0 +1,141 @@
+# Indian Food Composition Tables 2017
+# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
+#
+# Copyright  © 2017 by National Institute of Nutrition
+# Indian Council of Medical Research
+# Department of Health Research Ministry of Health and Family Welfare, Government of India
+# Jamai Osmania (PO), Hyderabad – 500 007
+# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
+#
+# FATTY ACID PROFILE
+# (All values are expressed per 100g edible portion; All blank space in the table represent below detectable limit)
+# - Food Code
+# - Food Name
+# - No. of Regions
+# - Lauric (C12:0) [mg]
+# - Myristic (C14:0) [mg]
+# - Pentadecanoic (C15:0) [mg]
+# - Palmitic (C16:0) [mg]
+# - Stearic (C18:0) [mg]
+# - Arachidic (C20:0) [mg]
+# - Behenic (C22:0) [mg]
+# - Lignoceric (C24:0) [mg]
+# - Palmitoleic (C16:1) [mg]
+code,name,regn,f12d0,f14d0,f15d0,f16d0,f18d0,f20d0,f22d0,f24d0,f16d1c
+P001,Allathi (Elops machnata),1,,36.99,5.65,205,90.69,3.48,2.17,1.87,49.07
+P002,Aluva (Parastromateus niger),3,,46.21±24.45,17.84±4.87,479±164,197±30.5,9.56±2.03,5.53±2.16,,56.73±34.83
+P003,Anchovy (Stolephorus indicus),2,,14.33,4.16,178,51.19,,,,20.17
+P004,Ari fish (Aprion virescens ),1,,19.68,7.17,251,122,5.11,2.52,,25.05
+P005,Betki (Lates calcarifer),1,1.82,5.33,,56.47,22.78,,,,16.28
+P006,Black snapper (Macolor niger),1,,52.75,,312,106,,,,87.36
+P007,Bombay duck (Harpadon nehereus),2,,45.49,,283,70.16,,,,69.09
+P008,Bommuralu(Muraenesox cinerius),3,,145±41.1,25.20±3.00,793±144,261±30.1,10.96±2.39,1.72±2.98,,254±69.1
+P009,Cat fish (Tachysurus thalassinus),1,,39,12.62,485,249,6.85,,,86.44
+P010,Chakla (Rachycentron canadum),5,,60.90±63.59,11.16±7.83,392±267,182±96.3,6.68±4.15,1.08±2.43,,87.08±78.54
+P011,Chappal (Aluterus monoceros ),1,,5.76,,130,63.46,,,,7.31
+P012,Chelu (Elagatis bipinnulata),2,,11.18,2.74,148,64.54,1.77,0.65,0.62,18.24
+P013,Chembali (Lutjanus quinquelineatus),1,,61.97,8.54,461,155,7.13,5.48,,92.54
+P014,Eri meen (Pristipomoides filamentosus),1,,66.39,19.03,445,189,13.49,5.45,,74.18
+P015,Gobro (Epinephelus diacanthus),2,,22.46,5.1,177,81.09,3.44,,,39.29
+P016,Guitar fish (Rhinobatus prahli),1,,1.53,1.16,68.68,41.53,0.71,,,3.57
+P017,Hilsa (Tenualosa ilisha),2,17.71,1650,,6091,1468,35.64,23.62,,2225
+P018,Jallal (Arius sp.),1,,36.18,8.83,323,142,5.39,3.69,,74.02
+P019,Jathi vela meen (Lethrinus lentjan),2,1.05,61.34,10.16,559,191,7.98,6.24,,91.3
+P020,Kadal bral (Synodus indicus),1,,54.74,8.22,298,108,5.33,3.34,,76.91
+P021,Kadali (Nemipterus mesoprion),1,,152,23.58,936,469,17.05,12.93,,154
+P022,Kalamaara (Leptomelanosoma indicum),2,,403,35,1242,394,21.37,11.41,,417
+P023,Kalava (Epinephelus coioides),1,,37.86,8.41,267,133,4.99,3.44,,57.29
+P024,Kanamayya (Lutjanus rivulatus),2,,23.79,4.18,125,52.05,3.14,1.19,,22.96
+P025,Kannadi paarai (Alectis indicus),3,,20.27±15.04,24.65±16.09,291±147,137±44.6,3.57±0.95,2.50±2.32,,46.51±23.91
+P026,Karimeen (Etroplus suratensis),1,,42.45,13.14,355,158,4.47,3.22,,69.74
+P027,Karnagawala (Anchoa hepsetus),1,,11.52,4.51,170,68.25,,,,20.12
+P028,Kayrai (Thunnus albacores),2,,102,21.89,664,290,8.01,9.38,,139
+P029,Kiriyan (Atule mate),1,,226,31.67,1275,523,29.07,17.16,,276
+P030,Kite fish (Mobula kuhlii),1,,3.27,8.29,96.98,60.88,,,,6.93
+P031,Korka (Terapon jarbua),1,,157,28.23,881,312,18.35,10.26,,203
+P032,Kulam paarai (Carangoides fulvoguttatus),1,,130,25.86,878,366,9.05,11.03,10.74,184
+P033,Maagaa (Polynemus plebeius),1,,14.28,3.96,124,54.85,1.82,1.43,,26.84
+P034,Mackerel (Rastrelliger kanagurta),3,,48.67±45.57,10.05±7.88,351±278,180±142,7.34±7.62,4.24±3.76,3.17±5.49,78.69±74.54
+P035,Manda clathi (Naso reticulatus),1,,28.79,6.56,207,87.83,3.87,2.62,,55.63
+P036,Matha (Acanthurus mata),2,,25,6.94,191,66.74,4.59,1.89,,22.06
+P037,Milk fish (Chanos chanos),1,,15.37,4.42,231,106,4.21,4.14,,18.02
+P038,Moon fish (Mene maculata),1,,293,67.4,1751,721,40.94,32.96,23.61,336
+P039,Mullet (Mugil cephalus),3,,54.67±21.48,18.50±12.89,305±71.4,114±39.6,1.99±3.44,1.53±2.65,,84.01±26.32
+P040,Mural (Tylosurus crocodilus crocodilus),1,,26.63,8.1,242,72.52,,,,35.46
+P041,Myil meen (Istiophorus platypterus),2,,5.94,0.56,89.37,51.87,1.84,,,9.19
+P042,Nalla bontha (Epinephelus sp.),1,,18.45,3.48,151,62.8,2.51,,,31.42
+P043,Narba (Caranx sexfasciatus),2,,29.59,9.57,338,213,7.45,2.44,2.58,41.23
+P044,Paarai (Caranx heberi),1,,63.05,13.28,413,216,8.38,6.03,,70.25
+P045,Padayappa (Canthidermis maculata),1,,3.51,2.88,95.5,67.48,,,,6.5
+P046,Pali kora (Panna microdon),1,,59.38,10.9,547,129,9.02,6.55,,172
+P047,Pambada (Lepturacanthus savala),2,,214,35.05,1226,451,17.67,9.97,6.56,248
+P048,Pandukopa (Pseudosciaena manchurica),1,,10.89,2.92,117,64.25,,,,17.03
+P049,Parava (Lactarius lactarius),1,,82.46,12.71,798,265,16.27,9.99,,138
+P050,Parcus (Psettodes erumei),1,,4.84,2.36,101,57.55,,,,9.45
+P051,Parrot fish (Scarus ghobban),1,,10.07,1.81,122,37.08,1.17,2.34,,18.24
+P052,Perinkilichai (Pinjalo pinjalo),1,,13.14,,185,91.47,,,,16.89
+P053,Phopat (Coryphaena hippurus),4,,34.95±25.54,9.00±7.54,259±120,136±43.4,2.86±3.31,,,50.32±32.06
+P054,Piranha (Pygopritis sp.),1,,79.47,8.32,1460,419,6.93,,,392
+P055,"Pomfret, black (Parastromateus niger)",2,,115,,1428,622,45.61,18.49,,157
+P056,"Pomfret, snub nose (Trachinotus blochii)",2,,5.86,1.67,92.19,44.27,1.5,,,6.31
+P057,"Pomfret, white (Pampus argenteus)",2,,258,41.43,1598,532,45.58,19.93,174,851
+P058,Pranel (Gerres sp.),1,,61.61,17.66,525,212,7.48,3.59,,95.01
+P059,Pulli paarai (Gnathanodon speciosus),1,,35.67,7.52,372,173,4.46,,,53.92
+P060,Queen fish (Scomberoides commersonianus),3,,69.84±81.60,11.18±11.97,413±438,190±180,2.14±2.05,4.26±5.70,3.01±5.22,93.60±104
+P061,Raai fish (Lobotes surinamensis),2,,51,8.47,414,174,6.01,,,79.09
+P062,Raai vanthu (Epinephelus chlorostigma),1,,80.47,17.01,536,209,10.03,5.89,5.33,113
+P063,Rani (Pink perch),1,10.46,207,,1869,790,31.55,17.92,,409
+P064,"Ray fish, bow head, spotted (Rhina ancylostoma)",1,,,,100,86.38,,,,8.55
+P065,Red snapper (Lutjanus argentimaculatus),1,,44.11,7.38,290,130,5.91,3.24,3.59,63.93
+P066,"Red snapper, small (Priacanthus hamrur)",1,,99.01,25.83,528,194,8.45,6.06,,119
+P067,Sadaya (Platax orbicularis ),1,,27.81,12,601,407,11.09,,,51.61
+P068,Salmon (Salmo salar),1,,384,90.84,2697,1057,51.9,23.76,,667
+P069,Sangada (Nemipterus japanicus),1,,78.25,25.16,659,336,17.22,12.31,,126
+P070,Sankata paarai (Caranx ignobilis),1,,352,47.55,2069,767,39.77,19.6,21.07,495
+P071,Sardine (Sardinella longiceps),1,,215,,765,246,15.52,7.79,,289
+P072,Shark (Carcharhinus sorrah),2,,21.83,2.34,156,94.89,,,,35.41
+P073,"Shark, hammer head (Sphyrna mokarran)",1,,7.35,,143,110,,4.35,,15.15
+P074,"Shark, spotted (Stegostoma fasciatum)",1,,20.61,4.05,142,83.13,2.75,,,35.19
+P075,Shelavu (Sphyraena jello),4,,99.11±49.21,10.42±3.27,411±120,145±43.5,8.58±3.07,2.62±2.63,,126±58.3
+P076,Silan (Silonia silondia),1,,284,,2641,667,15.26,7.25,,84.03
+P077,Silk fish (Beryx sp.),1,,54.36,10.7,295,127,6.97,3.5,,77.19
+P078,Silver carp (Hypophthalmichthys molitrix),1,11.09,247,,1318,220,17.51,11.87,,615
+P079,Sole fish (Cynoglossus arel),1,,31.31,13.72,227,138,6.13,,,36.41
+P080,Stingray (Dasyatis pastinaca),1,,10.96,,150,129,,,,14.47
+P081,Tarlava (Drepane punctata),2,,43.41,8.13,328,117,5.19,3.17,,72.27
+P082,Tholam (Plectorhinchus schotaf),2,,78.58,15.88,557,190,8.64,3.46,2.91,107
+P083,Tilapia (Oreochromis niloticus),1,,61.56,,270,76.21,4.72,,,113
+P084,Tuna (Euthynnus affinis),5,,53.12±59.44,11.08±11.43,399±317,184±108,8.50±10.28,3.75±4.37,,76.97±85.13
+P085,"Tuna, striped (Katsuwonus pelamis)",1,,30.58,8.29,243,137,5.87,,,35.3
+P086,Valava (Chirocentrus nudus),1,,33.97,7.72,262,96.64,3.31,,,29.78
+P087,Vanjaram (Scomberomorus commerson),2,,325,33.96,1352,464,28.87,17.73,7.74,431
+P088,Vela meen (Aprion virescens),1,,50.6,,1255,528,11.77,11.42,,103
+P089,Vora (Siganus javus),2,44.09,144,29.09,767,197,15.68,8.16,1.14,143
+P090,Whale shark (Galeocerdo cuvier),1,,22.76,5.18,164,69.44,3.06,2.07,,43.98
+P091,Xiphinis (Xiphias gladius),1,,39.39,5.47,235,73.36,6.43,3.36,,27.21
+P092,"Eggs, Cat fish (Ompok bimaculatus)",1,,67.15,,1206,526,5.72,12.81,,197
+Q001 ,Crab (Menippe mercenaria) ,1,,10.85,,131,71.8,,,,29.24
+Q002,"Crab, sea (Portunus sanguinolentus)",1,,5.7,1.01,63.49,57.4,0.99,,,20.35
+Q003,"Lobster, brown (Thenus orientalis)",1,,6.83,2.32,56.45,37.7,2.26,,,19.88
+Q004,"Lobster, king size (Thenus orientalis)",1,,7.51,,95.24,71.66,,,,28.21
+Q005,Mud crab (Scylla tranquebarica),1,,4.36,,52.71,38.05,,,,17.87
+Q006,Oyster (Crassostrea sp.),1,,126,27.48,736,190,8.39,,,137
+Q007,"Tiger prawns, brown (Solenocera crassicornis)",1,,7.19,3.11,65.63,43.57,1.2,,,25.87
+Q008,"Tiger Prawns, orange (Penaeus monodon)",1,,5.2,5.31,94.05,72.64,,,,24.59
+R001,"Clam, green shell(Perna viridis )",1,,42.42,14.06,185,42.78,1.35,,,57.16
+R002,"Clam, white shell, ribbed (Meretrix meretrix)",1,,36.15,10.27,256,132,5.94,,,52.47
+R003,Octopus (Octopus vulgaris),1,,17.36,,173,135,,,,23.57
+R004,"Squid, black (Loligo sp.)",1,,19.7,,201,65.78,,,,6.59
+R005,"Squid, hard shell (Sepia pharaonis)",1,,12.75,3.64,135,74.11,1.6,,,13.13
+R006,"Squid, red (Loligo duvaucelii)",2,,31.31,6.46,323,87.45,,,,12.49
+R007,"Squid, white, small (Uroteuthis duvauceli)",1,,15.78,,182,106,,,,6.79
+S001,Cat fish (Tandanus tandanus),2,28.88±30.76,177±133,,1554±1062,395±209,16.30±7.57,11.03±4.77,,538±436
+S002,Catla (Catla catla),6,,162±40.1,,1162±142,330±126,15.51±2.56,,,273±89.9
+S003,Freshwater Eel (Anguilla anguilla),1,8.87,94.91,,640,217,14.44,5.84,,204
+S004,Gold fish (Carassius auratus),2,7.45,77.02,,647,154,8.78,3.43,,260
+S005,Pangas (Pangasianodon hypophthalmus),6,,58.54±26.07,,635±269,161±56.7,7.82±1.68,,,132±52.4
+S006,Rohu (Labeo rohita),6,6.94±6.00,337±81.1,,2234±531,571±95.7,13.83±3.99,19.47±16.17,,123±17.4
+S007,Crab (Pachygrapsus sp.),1,,10.85,,131,71.8,,,,29.24
+S008,"Prawns, big (Macrobrachium rosenbergii)",1,,4.5,,53.55,28.81,,,,14.59
+S009,"Prawns, small (Macrobrachium sp.)",3,,10.71,,133,53.52,,,,22.05
+S010,Tiger prawns (Macrobrachium sp.),2,,4.78,,83.75,45.91,,,,16.21
