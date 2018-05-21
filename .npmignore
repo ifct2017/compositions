@@ -1,5 +1,5 @@
 # build
 assets/
-columns.js
-factors.js
+columns.csv
+factors.csv
 build.js

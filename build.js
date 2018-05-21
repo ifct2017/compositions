@@ -1,4 +1,6 @@
-const csv = require('csv');
+const descriptions = require('@ifct2017/descriptions')
+const groups = require('@ifct2017/groups');
+const parse = require('csv-parse');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -10,7 +12,7 @@ function round(val) {
 function readFactors() {
   var map = new Map();
   return new Promise((fres) => {
-    var stream = fs.createReadStream('factors.csv').pipe(csv.parse({columns: true, comment: '#'}));
+    var stream = fs.createReadStream('factors.csv').pipe(parse({columns: true, comment: '#'}));
     stream.on('data', (r) => map.set(r.code, r.factor));
     stream.on('end', () => fres(map));
   });
@@ -19,7 +21,7 @@ function readFactors() {
 function readColumns() {
   var map = new Map();
   return new Promise((fres) => {
-    var stream = fs.createReadStream('columns.csv').pipe(csv.parse({columns: true, comment: '#'}));
+    var stream = fs.createReadStream('columns.csv').pipe(parse({columns: true, comment: '#'}));
     stream.on('data', (r) => map.set(r.code, r.actual));
     stream.on('end', () => fres(map));
   });
@@ -29,6 +31,8 @@ var dat = {
   code: [],
   name: [],
   scie: [],
+  desc: [],
+  grup: [],
   regn: []
 };
 var di = 0;
@@ -66,6 +70,8 @@ function csvReadRow(row) {
   dat.code[i] = cod;
   dat.name[i] = old && dat.name[i].length>nam.length? dat.name[i]:nam;
   dat.scie[i] = old && dat.scie[i].length>sci.length? dat.scie[i]:sci;
+  dat.desc[i] = (descriptions.corpus.get(cod)||{desc: ''}).desc;
+  dat.grup[i] = groups.corpus.get(cod[0]).group;
   dat.regn[i] = parseInt(row.regn.trim(), 10);
   for(var k in row) {
     if(k==='code' || k==='name' || k==='scie' || k==='regn') continue;
@@ -78,7 +84,7 @@ function csvReadRow(row) {
 
 function csvRead(pth) {
   return new Promise((fres) => {
-    var stm = fs.createReadStream(pth).pipe(csv.parse({columns: true, comment: '#'}));
+    var stm = fs.createReadStream(pth).pipe(parse({columns: true, comment: '#'}));
     stm.on('data', csvReadRow);
     stm.on('end', () => fres());
   });
@@ -168,6 +174,7 @@ function combinedColumns(d) {
 };
 
 async function build() {
+  await descriptions.load();
   factors = await readFactors();
   columns = await readColumns();
   for(var file of fs.readdirSync('assets'))
