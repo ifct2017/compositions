@@ -8,13 +8,13 @@ var corpus = new Map();
 var index = null;
 var ready = null;
 
-function tsvector(tab) {
-  return `setweight(to_tsvector('english', "code"), 'A')||`+
-  `setweight(to_tsvector('english', left("name", strpos("name", ','))), 'A')||`+
-  `setweight(to_tsvector('english', "name"), 'B')||`+
-  `setweight(to_tsvector('english', "scie"), 'B')||`+
-  `setweight(to_tsvector('english', ${tab}_lang_tags("lang")), 'B')||`+
-  `setweight(to_tsvector('english', "grup"), 'C')`;
+function tsvector(tab, cols) {
+  return `setweight(to_tsvector('english', "code"), '${cols.code||'A'}')||`+
+  `setweight(to_tsvector('english', left("name", strpos("name", ','))), '${cols.code||'A'}')||`+
+  `setweight(to_tsvector('english', "name"), '${cols.name||'B'}')||`+
+  `setweight(to_tsvector('english', "scie"), '${cols.scie||'B'}')||`+
+  `setweight(to_tsvector('english', ${tab}_lang_tags("lang")), '${cols.lang||'B'}')||`+
+  `setweight(to_tsvector('english', "grup"), '${cols.grup||'C'}')`;
 };
 
 function createFunctionLangTags(tab) {
@@ -29,7 +29,7 @@ function createFunctionLangTags(tab) {
   ` LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT;\n`;
 };
 
-function createTable(tab, cols, z='') {
+function createTable(tab, cols, opt={}, z='') {
   var don = ['code', 'name', 'scie', 'lang', 'grup', 'regn'];
   z += `CREATE TABLE IF NOT EXISTS "${tab}" (`;
   for(var col of don) {
@@ -40,12 +40,9 @@ function createTable(tab, cols, z='') {
     if(don.includes(k)) continue;
     z += ` "${k}" REAL NOT NULL,`;
   }
-  z += ` PRIMARY KEY ("code")`+
-    `);\n`;
-  z += createFunctionLangTags(tab);
-  z += Sql.createView(`${tab}_tsvector`, `SELECT *, ${tsvector(tab)} AS "tsvector" FROM "${tab}"`);
-  z += Sql.createIndex(`${tab}_tsvector_idx`, tab, `(${tsvector(tab)})`, {method: 'GIN'});
-  z = Sql.setupTable.index(tab, cols, {pk: 'code', index: true}, z)
+  if(opt.pk) z += ` PRIMARY KEY ("code"), `;
+  z = z.endsWith(', ')? z.substring(0, z.length-2):z;
+  z += `);\n`;
   return z;
 };
 
@@ -55,6 +52,7 @@ function insertIntoBegin(tab, cols, z='') {
     z += `"${col}", `;
   z = z.endsWith(', ')? z.substring(0, z.length-2):z;
   z += ') VALUES\n(';
+  return z;
 };
 
 function insertIntoMid(val, z='') {
@@ -77,19 +75,21 @@ function csv() {
 
 function sql(tab='compositions', opt={}) {
   var i = -1, cols = null, z = '';
+  var opt = Object.assign({pk: 'code', index: true}, opt);
+  var tsv = tsvector(tab, {code: 'A', name: 'B', scie: 'B', lang: 'B', grup: 'C'});
   var stream = fs.createReadStream(csv()).pipe(parse({columns: true, comment: '#'}));
   return new Promise((fres, frej) => {
     stream.on('error', frej);
     stream.on('data', (r) => {
-      if(++i===0) { cols = r; z = createTable(tab, cols, z); z = insertIntoBegin(tab, cols, z); }
+      if(++i===0) { cols = r; z = createTable(tab, cols, opt, z); z = insertIntoBegin(tab, cols, z); }
       z = insertIntoMid(r, z);
     });
     stream.on('end', () => {
       z = insertIntoEnd(z);
       z += createFunctionLangTags(tab);
-      z += Sql.createView(`${tab}_tsvector`, `SELECT *, ${tsvector(tab)} AS "tsvector" FROM "${tab}"`);
-      z += Sql.createIndex(`${tab}_tsvector_idx`, tab, `(${tsvector(tab)})`, {method: 'GIN'});
-      z = Sql.setupTable.index(tab, cols, {pk: 'code', index: true}, z);
+      z += Sql.createView(`${tab}_tsvector`, `SELECT *, ${tsv} AS "tsvector" FROM "${tab}"`);
+      z += Sql.createIndex(`${tab}_tsvector_idx`, tab, `(${tsv})`, {method: 'GIN'});
+      z = Sql.setupTable.index(tab, cols, opt, z);
       fres(z);
     });
   });

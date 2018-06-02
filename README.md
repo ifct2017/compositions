@@ -1,33 +1,33 @@
-# @ifct2017/descriptions
+# @ifct2017/compositions
 
 [![IFCT2017](http://ninindia.org/images/ifct_2017.png)](http://ninindia.org/ifct_2017.htm)
 
-Food descriptions in [Indian Food Composition Tables 2017].<br>
-Check available [food descriptions].
+Food compositions in [Indian Food Composition Tables 2017].<br>
+Check available [food compositions].
 > Large corpus is not loaded synchronously.<br>
 > Load it asynchronously with **.load()**.
 
 ```javascript
-const descriptions = require('@ifct2017/descriptions');
-// descriptions(<query>)
-// -> [{code, name, scie, desc}] for matched foods
-// descriptions.corpus: Map {code => {code, name, scie, desc}}
-// descriptions.load(): load corpus (returns promise)
-// descriptions.sql([table], [options]): Promise (sql commands)
-// descriptions.csv(): path to csv file
+const compositions = require('@ifct2017/compositions');
+// compositions.corpus: Map {code => {code, name, scie, lang, grup, regn, ...}}
+// compositions.load(): Promise (corpus loaded)
+// compositions.sql([table], [options]): Promise (sql commands)
+// compositions.csv(): path to csv file
+// compositions(<query>)
+// -> [{code, name, scie, lang, grup, regn, ...}] for matched foods
 
-await descriptions.load();
+await compositions.load();
 /* load corpus first */
 
-descriptions('pineapple');
-descriptions('ananas comosus');
+compositions('pineapple');
+compositions('ananas comosus');
 // [ { code: 'E053',
 //     name: 'Pineapple',
 //     scie: 'Ananas comosus',
 //     desc: 'A. Ahnaros; B. Anarasa; G. Anenas; H. Ananas; Kan. Ananas; Kash. Punchitipul; Kh. Soh trun; Kon. Anas; Mal. Kayirha chakka; M. Kihom Ananas; O. Sapuri; P. Ananas; Tam. Annasi pazham; Tel. Anasa pandu; U. Ananas.' } ]
 
-descriptions('tell me about cow milk.');
-descriptions('gai ka doodh details.');
+compositions('tell me about cow milk.');
+compositions('gai ka doodh details.');
 // [ { code: 'L002',
 //     name: 'Milk, Cow',
 //     scie: '',
@@ -36,4 +36,4 @@ descriptions('gai ka doodh details.');
 
 
 [Indian Food Composition Tables 2017]: http://ifct2017.com/
-[food descriptions]: https://github.com/ifct2017/descriptions/blob/master/index.csv
+[food compositions]: https://github.com/ifct2017/compositions/blob/master/index.csv
