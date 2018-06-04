@@ -65,7 +65,7 @@ function insertIntoMid(val, z='') {
 
 function insertIntoEnd(z='') {
   z = z.endsWith(',\n(')? z.substring(0, z.length-3):z;
-  z += ');\n';
+  z += ';\n';
   return z;
 };
 
