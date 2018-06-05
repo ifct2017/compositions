@@ -4,8 +4,6 @@
 
 Food compositions in [Indian Food Composition Tables 2017].<br>
 Check available [food compositions].
-> Large corpus is not loaded synchronously.<br>
-> Load it asynchronously with **.load()**.
 
 ```javascript
 const compositions = require('@ifct2017/compositions');
@@ -15,6 +13,7 @@ const compositions = require('@ifct2017/compositions');
 // compositions.csv(): path to csv file
 // compositions(<query>)
 // -> [{code, name, scie, lang, grup, regn, ...}] for matched foods
+
 
 await compositions.load();
 /* load corpus first */
