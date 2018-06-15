@@ -90,7 +90,7 @@ P065,Red snapper (Lutjanus argentimaculatus),1,,44.11,7.38,290,130,5.91,3.24,3.5
 P066,"Red snapper, small (Priacanthus hamrur)",1,,99.01,25.83,528,194,8.45,6.06,,119
 P067,Sadaya (Platax orbicularis ),1,,27.81,12,601,407,11.09,,,51.61
 P068,Salmon (Salmo salar),1,,384,90.84,2697,1057,51.9,23.76,,667
-P069,Sangada (Nemipterus japanicus),1,,78.25,25.16,659,336,17.22,12.31,,126
+P069,Sangada (Nemipterus japonicus),1,,78.25,25.16,659,336,17.22,12.31,,126
 P070,Sankata paarai (Caranx ignobilis),1,,352,47.55,2069,767,39.77,19.6,21.07,495
 P071,Sardine (Sardinella longiceps),1,,215,,765,246,15.52,7.79,,289
 P072,Shark (Carcharhinus sorrah),2,,21.83,2.34,156,94.89,,,,35.41
@@ -127,7 +127,7 @@ R002,"Clam, white shell, ribbed (Meretrix meretrix)",1,,36.15,10.27,256,132,5.94
 R003,Octopus (Octopus vulgaris),1,,17.36,,173,135,,,,23.57
 R004,"Squid, black (Loligo sp.)",1,,19.7,,201,65.78,,,,6.59
 R005,"Squid, hard shell (Sepia pharaonis)",1,,12.75,3.64,135,74.11,1.6,,,13.13
-R006,"Squid, red (Loligo duvaucelii)",2,,31.31,6.46,323,87.45,,,,12.49
+R006,"Squid, red (Loligo duvauceli)",2,,31.31,6.46,323,87.45,,,,12.49
 R007,"Squid, white, small (Uroteuthis duvauceli)",1,,15.78,,182,106,,,,6.79
 S001,Cat fish (Tandanus tandanus),2,28.88±30.76,177±133,,1554±1062,395±209,16.30±7.57,11.03±4.77,,538±436
 S002,Catla (Catla catla),6,,162±40.1,,1162±142,330±126,15.51±2.56,,,273±89.9
