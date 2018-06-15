@@ -39,6 +39,7 @@ var di = 0;
 var map = new Map();
 var factors = new Map();
 var columns = new Map();
+groups.load();
 
 function valParse(val, code) {
   var z = (parseFloat(val)||0)*factors.get(code);
