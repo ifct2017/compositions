@@ -19,12 +19,8 @@ function tsvector(tab, cols) {
 
 function createFunctionLangTags(tab) {
   return `CREATE OR REPLACE FUNCTION "${tab}_lang_tags" (TEXT) RETURNS TEXT AS $$`+
-  ` SELECT lower(regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace(`+
-  ` regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace($1, `+
-  ` '^\\[.*\\]$', '', 'g'), 'ḷ', 'l', 'g'),`+
-  ` 'ḍ', 'd', 'g'), 'ṇ', 'n', 'g'), 'ṃ', 'm', 'g'),`+
-  ` 'ṅ', 'n', 'g'), 'ā', 'a', 'g'), 'ī', 'i', 'g'),`+
-  ` '\\w+\\.\\s([\\w\\'',\\/\\(\\)\\- ]+)[;\\.]?', '\\1', 'g'),`+
+  ` SELECT lower(regexp_replace(regexp_replace(regexp_replace($1, `+
+  ` '\\[.*?\\]', '', 'g'), '\\w+\\.\\s([\\w\\'',\\/\\(\\)\\- ]+)[;\\.]?', '\\1', 'g'),`+
   ` '[,\\/\\(\\)\\- ]+', ' ', 'g')) $$`+
   ` LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT;\n`;
 };
