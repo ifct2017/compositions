@@ -7,12 +7,12 @@ Check available [food compositions].
 
 ```javascript
 const compositions = require('@ifct2017/compositions');
-// compositions.corpus: Map {code => {code, name, scie, lang, grup, regn, ...}}
+// compositions.corpus: Map {code => {code, name, scie, lang, grup, regn, tags, ...}}
 // compositions.load(): Promise (corpus loaded)
 // compositions.sql([table], [options]): Promise (sql commands)
 // compositions.csv(): path to csv file
 // compositions(<query>)
-// -> [{code, name, scie, lang, grup, regn, ...}] for matched foods
+// -> [{code, name, scie, lang, grup, regn, tags, ...}] for matched foods
 
 
 await compositions.load();
