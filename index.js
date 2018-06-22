@@ -14,7 +14,8 @@ function tsvector(tab, cols) {
   `setweight(to_tsvector('english', "name"), '${cols.name||'B'}')||`+
   `setweight(to_tsvector('english', "scie"), '${cols.scie||'B'}')||`+
   `setweight(to_tsvector('english', ${tab}_lang_tags("lang")), '${cols.lang||'B'}')||`+
-  `setweight(to_tsvector('english', "grup"), '${cols.grup||'C'}')`;
+  `setweight(to_tsvector('english', "grup"), '${cols.grup||'C'}')||`+
+  `setweight(to_tsvector('english', "tags"), '${cols.tags||'C'}')`;
 };
 
 function createFunctionLangTags(tab) {
@@ -26,7 +27,7 @@ function createFunctionLangTags(tab) {
 };
 
 function createTable(tab, cols, opt={}, z='') {
-  var don = ['code', 'name', 'scie', 'lang', 'grup', 'regn'];
+  var don = ['code', 'name', 'scie', 'lang', 'grup', 'regn', 'tags'];
   z += `CREATE TABLE IF NOT EXISTS "${tab}" (`;
   for(var col of don) {
     var typ = col==='regn'? 'INT':'TEXT';
@@ -72,7 +73,7 @@ function csv() {
 function sql(tab='compositions', opt={}) {
   var i = -1, cols = null, z = '';
   var opt = Object.assign({pk: 'code', index: true}, opt);
-  var tsv = tsvector(tab, {code: 'A', name: 'B', scie: 'B', lang: 'B', grup: 'C'});
+  var tsv = tsvector(tab, {code: 'A', name: 'B', scie: 'B', lang: 'B', grup: 'C', tags: 'C'});
   var stream = fs.createReadStream(csv()).pipe(parse({columns: true, comment: '#'}));
   return new Promise((fres, frej) => {
     stream.on('error', frej);
@@ -107,13 +108,14 @@ function setupIndex() {
     this.field('scie');
     this.field('lang');
     this.field('grup');
+    this.field('tags');
     for(var r of corpus.values()) {
-      var {code, name, scie, lang, grup} = r;
+      var {code, name, scie, lang, grup, tags} = r;
       name = name.replace(/^(\w+),/g, '$1 $1 $1 $1,');
-      lang = lang.replace(/^\[.*\]$/g).replace(/ā/g, 'a').replace(/ḍ/g, 'd').replace(/ī/g, 'i');
-      lang = lang.replace(/ḷ/g, 'l').replace(/ṃ/g, 'm').replace(/ṇ/g, 'n').replace(/ṅ/g, 'n');
-      lang = lang.replace(/\w+\.\s([\w\',\/\(\)\- ]+)[;\.]?/g, '$1').replace(/[,\/\(\)\- ]+/g, ' ');
-      this.add({code, name, scie, lang, grup});
+      lang = lang.replace(/\[.*?\]/g, '');
+      lang = lang.replace(/\w+\.\s([\w\',\/\(\)\- ]+)[;\.]?/g, '$1');
+      lang = lang.replace(/[,\/\(\)\- ]+/g, ' ');
+      this.add({code, name, scie, lang, grup, tags});
     }
   });
 };
