@@ -5,6 +5,9 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 
+const BASE = ['code', 'name', 'scie', 'lang', 'grup', 'regn', 'tags'];
+
+
 function round(val) {
   return Math.round(val*1e+12)/1e+12;
 };
@@ -33,7 +36,8 @@ var dat = {
   scie: [],
   lang: [],
   grup: [],
-  regn: []
+  regn: [],
+  tags: [],
 };
 var di = 0;
 var map = new Map();
@@ -74,8 +78,9 @@ function csvReadRow(row) {
   dat.lang[i] = (descriptions.corpus.get(cod)||{desc: ''}).desc;
   dat.grup[i] = groups.corpus.get(cod[0]).group;
   dat.regn[i] = parseInt(row.regn.trim(), 10);
+  dat.tags[i] = groups.corpus.get(cod[0]).tags.trim();
   for(var k in row) {
-    if(k==='code' || k==='name' || k==='scie' || k==='regn') continue;
+    if(BASE.includes(k)) continue;
     var val = row[k].trim().split('±'), kt = columns.get(k)||k;
     if(!dat[kt]) { dat[kt] = []; dat[kt+'_e'] = []; }
     dat[kt][i] = valParse(val[0]||'0', k);
