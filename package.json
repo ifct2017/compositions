@@ -1,6 +1,6 @@
 {
   "name": "@ifct2017/compositions",
-  "version": "0.3.6",
+  "version": "1.0.0",
   "description": "Food compositions in Indian Food Composition Tables 2017.",
   "main": "index.js",
   "scripts": {
@@ -26,12 +26,12 @@
   },
   "homepage": "https://github.com/ifct2017/compositions#readme",
   "devDependencies": {
-    "@ifct2017/descriptions": "^0.3.8",
-    "@ifct2017/groups": "^0.3.4"
+    "@ifct2017/descriptions": "^1.0.1",
+    "@ifct2017/groups": "^1.0.1"
   },
   "dependencies": {
     "csv-parse": "^2.5.0",
-    "lunr": "^2.2.1",
+    "lunr": "^2.3.0",
     "sql-extra": "^0.1.13"
   }
 }
