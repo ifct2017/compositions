@@ -1,4 +1,4 @@
-[Food compositions] in [Indian Food Composition Tables 2017].<br>
+[Food compositions] in [Indian Food Composition Tables 2017].
 
 ```javascript
 const compositions = require('@ifct2017/compositions');
