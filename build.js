@@ -34,6 +34,7 @@ var map = new Map();
 var factors = null;
 var columns = null;
 var aggregate = null;
+var arrange = null;
 groups.load();
 
 function valParse(val, code) {
@@ -104,16 +105,32 @@ function aggregateAll(d) {
       d[k][i] = round(sumColumns(d, i, sumk));
   }
 };
+function arrangeAll(d) {
+  var z = {};
+  for(var k in d) {
+    if(k in z) continue;
+    for(var ak of arrange.get(k)||[])
+      z[ak] = d[ak];
+    z[k] = d[k];
+  }
+  return z;
+};
 
 async function build() {
   await descriptions.load();
   factors = await readCsv('factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
   columns = await readCsv('columns.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
   aggregate = await readCsv('aggregate.csv', (acc, r) => acc.set(r.code, r.expression), new Map());
+  arrange = await readCsv('arrange.csv', (acc, r) => {
+    var arr = acc.get(r.before)||[];
+    acc.set(r.before, arr);
+    arr.push(r.code);
+  }, new Map());
   for(var file of fs.readdirSync('assets'))
     await readAsset(path.join('assets', file));
   nullToZero(dat);
   aggregateAll(dat);
+  dat = arrangeAll(dat);
   var ks = Object.keys(dat), z = ks.join()+os.EOL;
   for(var i=0; i<di; i++) {
     for(var k of ks) {
