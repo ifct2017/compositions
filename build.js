@@ -12,6 +12,14 @@ function round(val) {
   return Math.round(val*1e+12)/1e+12;
 };
 
+function readCsv(pth, fn, acc) {
+  return new Promise((fres) => {
+    var stream = fs.createReadStream(pth).pipe(parse({columns: true, comment: '#'}));
+    stream.on('data', (r) => fn(acc, r));
+    stream.on('end', () => fres(acc));
+  });
+};
+
 function readFactors() {
   var map = new Map();
   return new Promise((fres) => {
@@ -181,7 +189,7 @@ function combinedColumns(d) {
 
 async function build() {
   await descriptions.load();
-  factors = await readFactors();
+  factors = await readCsv('factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
   columns = await readColumns();
   for(var file of fs.readdirSync('assets'))
     await csvRead(path.join('assets', file));
