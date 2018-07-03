@@ -109,8 +109,11 @@ function arrangeAll(d) {
   var z = {};
   for(var k in d) {
     if(k in z) continue;
-    for(var ak of arrange.get(k)||[])
+    for(var ak of arrange.get(k)||[]) {
       z[ak] = d[ak];
+      var ake = ak+'_e';
+      if(ake in d) z[ake] = d[ake];
+    }
     z[k] = d[k];
   }
   return z;
