@@ -20,24 +20,6 @@ function readCsv(pth, fn, acc) {
   });
 };
 
-function readFactors() {
-  var map = new Map();
-  return new Promise((fres) => {
-    var stream = fs.createReadStream('factors.csv').pipe(parse({columns: true, comment: '#'}));
-    stream.on('data', (r) => map.set(r.code, r.factor));
-    stream.on('end', () => fres(map));
-  });
-};
-
-function readColumns() {
-  var map = new Map();
-  return new Promise((fres) => {
-    var stream = fs.createReadStream('columns.csv').pipe(parse({columns: true, comment: '#'}));
-    stream.on('data', (r) => map.set(r.code, r.actual));
-    stream.on('end', () => fres(map));
-  });
-};
-
 var dat = {
   code: [],
   name: [],
@@ -190,7 +172,7 @@ function combinedColumns(d) {
 async function build() {
   await descriptions.load();
   factors = await readCsv('factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
-  columns = await readColumns();
+  columns = await readCsv('columns.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
   for(var file of fs.readdirSync('assets'))
     await csvRead(path.join('assets', file));
   nullToZero(dat);
