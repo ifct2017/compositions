@@ -31,8 +31,9 @@ var dat = {
 };
 var di = 0;
 var map = new Map();
-var factors = new Map();
-var columns = new Map();
+var factors = null;
+var columns = null;
+var aggregate = null;
 groups.load();
 
 function valParse(val, code) {
@@ -56,7 +57,7 @@ function nameBas(str) {
   return str.replace(new RegExp(`\\(\\s*${sci}\\s*\\)`), '').trim();
 };
 
-function csvReadRow(row) {
+function readAssetRow(row) {
   var cod = row.code.trim();
   var old = map.has(cod);
   var nam = nameBas(row.name);
@@ -78,10 +79,10 @@ function csvReadRow(row) {
   }
 };
 
-function csvRead(pth) {
+function readAsset(pth) {
   return new Promise((fres) => {
     var stm = fs.createReadStream(pth).pipe(parse({columns: true, comment: '#'}));
-    stm.on('data', csvReadRow);
+    stm.on('data', readAssetRow);
     stm.on('end', () => fres());
   });
 };
@@ -173,8 +174,9 @@ async function build() {
   await descriptions.load();
   factors = await readCsv('factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
   columns = await readCsv('columns.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
+  aggregate = await readCsv('aggregate.csv', (acc, r) => acc.set(r.code, r.expression), new Map());
   for(var file of fs.readdirSync('assets'))
-    await csvRead(path.join('assets', file));
+    await readAsset(path.join('assets', file));
   nullToZero(dat);
   combinedColumns(dat);
   var ks = Object.keys(dat), z = ks.join()+os.EOL;
