@@ -50,13 +50,11 @@ function nameSci(str) {
   var spc = sci.search(/\s/g);
   return spc>=0 && sci!=='small intestine'? sci:'';
 };
-
 function nameBas(str) {
   var sci = nameSci(str);
   if(!sci) return str.trim();
   return str.replace(new RegExp(`\\(\\s*${sci}\\s*\\)`), '').trim();
 };
-
 function readAssetRow(row) {
   var cod = row.code.trim();
   var old = map.has(cod);
@@ -78,7 +76,6 @@ function readAssetRow(row) {
     dat[kt+'_e'][i] = valParse(val[1]||'0', k);
   }
 };
-
 function readAsset(pth) {
   return new Promise((fres) => {
     var stm = fs.createReadStream(pth).pipe(parse({columns: true, comment: '#'}));
@@ -94,14 +91,12 @@ function nullToZero(d) {
       d[k][i] = d[k][i]!=null? d[k][i]:0;
   }
 };
-
 function sumColumns(d, i, ks) {
   var z = 0;
   for(var k of ks)
     z += d[k][i];
   return z;
 };
-
 function aggregateAll(d) {
   for(var [k, exp] of aggregate) {
     var sumk = exp.replace(/\s/g, '').split('+'); d[k] = [];
