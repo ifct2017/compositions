@@ -33,7 +33,7 @@ var di = 0;
 var map = new Map();
 var factors = null;
 var renames = null;
-var aggregate = null;
+var sums = null;
 var orders = null;
 groups.load();
 
@@ -99,7 +99,7 @@ function sumColumns(d, i, ks) {
   return z;
 };
 function aggregateAll(d) {
-  for(var [k, exp] of aggregate) {
+  for(var [k, exp] of sums) {
     var sumk = exp.replace(/\s/g, '').split('+'); d[k] = [];
     for(var i=0; i<di; i++)
       d[k][i] = round(sumColumns(d, i, sumk));
@@ -123,7 +123,7 @@ async function build() {
   await descriptions.load();
   factors = await readCsv('configs/factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
   renames = await readCsv('configs/renames.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
-  aggregate = await readCsv('configs/aggregate.csv', (acc, r) => acc.set(r.code, r.expression), new Map());
+  sums = await readCsv('configs/sums.csv', (acc, r) => acc.set(r.code, r.expression), new Map());
   orders = await readCsv('configs/orders.csv', (acc, r) => {
     var arr = acc.get(r.before)||[];
     acc.set(r.before, arr);
