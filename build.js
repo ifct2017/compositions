@@ -32,7 +32,7 @@ var dat = {
 var di = 0;
 var map = new Map();
 var factors = null;
-var columns = null;
+var renames = null;
 var aggregate = null;
 var arrange = null;
 groups.load();
@@ -71,7 +71,7 @@ function readAssetRow(row) {
   dat.tags[i] = groups.corpus.get(cod[0]).tags.trim();
   for(var k in row) {
     if(BASE.includes(k)) continue;
-    var val = row[k].trim().split('±'), kt = columns.get(k)||k;
+    var val = row[k].trim().split('±'), kt = renames.get(k)||k;
     if(!dat[kt]) { dat[kt] = []; dat[kt+'_e'] = []; }
     dat[kt][i] = valParse(val[0]||'0', k);
     dat[kt+'_e'][i] = valParse(val[1]||'0', k);
@@ -122,7 +122,7 @@ function arrangeAll(d) {
 async function build() {
   await descriptions.load();
   factors = await readCsv('configs/factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
-  columns = await readCsv('configs/columns.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
+  renames = await readCsv('configs/renames.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
   aggregate = await readCsv('configs/aggregate.csv', (acc, r) => acc.set(r.code, r.expression), new Map());
   arrange = await readCsv('configs/arrange.csv', (acc, r) => {
     var arr = acc.get(r.before)||[];
