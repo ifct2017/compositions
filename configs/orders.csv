@@ -1,5 +1,7 @@
-# Before column
-# Column
+# Column ordering
+# ---------------
+# before: Before column
+# code:   Column
 before,code
 water,fatce
 water,protcnt
