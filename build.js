@@ -34,7 +34,7 @@ var map = new Map();
 var factors = null;
 var renames = null;
 var aggregate = null;
-var arrange = null;
+var orders = null;
 groups.load();
 
 function valParse(val, code) {
@@ -109,7 +109,7 @@ function arrangeAll(d) {
   var z = {};
   for(var k in d) {
     if(k in z) continue;
-    for(var ak of arrange.get(k)||[]) {
+    for(var ak of orders.get(k)||[]) {
       z[ak] = d[ak];
       var ake = ak+'_e';
       if(ake in d) z[ake] = d[ake];
@@ -124,7 +124,7 @@ async function build() {
   factors = await readCsv('configs/factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
   renames = await readCsv('configs/renames.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
   aggregate = await readCsv('configs/aggregate.csv', (acc, r) => acc.set(r.code, r.expression), new Map());
-  arrange = await readCsv('configs/arrange.csv', (acc, r) => {
+  orders = await readCsv('configs/orders.csv', (acc, r) => {
     var arr = acc.get(r.before)||[];
     acc.set(r.before, arr);
     arr.push(r.code);
