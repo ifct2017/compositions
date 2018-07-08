@@ -98,14 +98,14 @@ function sumColumns(d, i, ks) {
     z += d[k][i];
   return z;
 };
-function aggregateAll(d) {
+function sumAll(d) {
   for(var [k, exp] of sums) {
     var sumk = exp.replace(/\s/g, '').split('+'); d[k] = [];
     for(var i=0; i<di; i++)
       d[k][i] = round(sumColumns(d, i, sumk));
   }
 };
-function arrangeAll(d) {
+function orderAll(d) {
   var z = {};
   for(var k in d) {
     if(k in z) continue;
@@ -132,8 +132,8 @@ async function build() {
   for(var file of fs.readdirSync('assets'))
     await readAsset(path.join('assets', file));
   nullToZero(dat);
-  aggregateAll(dat);
-  dat = arrangeAll(dat);
+  sumAll(dat);
+  dat = orderAll(dat);
   var ks = Object.keys(dat), z = ks.join()+os.EOL;
   for(var i=0; i<di; i++) {
     for(var k of ks) {
