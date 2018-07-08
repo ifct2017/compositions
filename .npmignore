@@ -1,5 +1,6 @@
 # build
 assets/
+configs/
 columns.csv
 factors.csv
 build.js
