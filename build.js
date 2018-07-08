@@ -121,10 +121,10 @@ function arrangeAll(d) {
 
 async function build() {
   await descriptions.load();
-  factors = await readCsv('factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
-  columns = await readCsv('columns.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
-  aggregate = await readCsv('aggregate.csv', (acc, r) => acc.set(r.code, r.expression), new Map());
-  arrange = await readCsv('arrange.csv', (acc, r) => {
+  factors = await readCsv('configs/factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
+  columns = await readCsv('configs/columns.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
+  aggregate = await readCsv('configs/aggregate.csv', (acc, r) => acc.set(r.code, r.expression), new Map());
+  arrange = await readCsv('configs/arrange.csv', (acc, r) => {
     var arr = acc.get(r.before)||[];
     acc.set(r.before, arr);
     arr.push(r.code);
