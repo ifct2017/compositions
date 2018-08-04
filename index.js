@@ -4,6 +4,7 @@ const lunr = require('lunr');
 const path = require('path');
 const fs = require('fs');
 
+const TEXTCOL = new Set(['code', 'name', 'scie', 'lang', 'grup', 'tags']);
 var corpus = new Map();
 var index = null;
 var ready = null;
@@ -92,10 +93,19 @@ function sql(tab='compositions', opt={}) {
   });
 };
 
+function loadRow(row) {
+  var z = {};
+  for(var k in row) {
+    if(TEXTCOL.has(k)) z[k] = row[k];
+    else z[k] = parseFloat(row[k]);
+  }
+  return z;
+};
+
 function loadCorpus() {
   return new Promise((fres) => {
     var stream = fs.createReadStream(csv()).pipe(parse({columns: true, comment: '#'}));
-    stream.on('data', (r) => corpus.set(r.code, r));
+    stream.on('data', (r) => corpus.set(r.code, loadRow(r)));
     stream.on('end', fres);
   });
 };
