@@ -38,13 +38,14 @@ async function main() {
   await compositions.load();
   var map = compositions.corpus;
   var cols = Object.keys(map.get('A001'));
-  var z = `type,fact,unit${os.EOL}`;
+  var z = `code,type,fact,unit${os.EOL}`;
   for(var c of cols) {
     if(c.endsWith('_e')) continue;
+    var code = c;
     var type = getType(c);
     var fact = getFactor(c);
     var unit = getUnit(c, fact)||'';
-    z += `${type},${fact},${unit}${os.EOL}`;
+    z += `${code},${type},${fact},${unit}${os.EOL}`;
   }
   fs.writeFileSync('meta.csv', z);
 };
