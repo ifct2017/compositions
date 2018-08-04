@@ -43,7 +43,7 @@ async function main() {
     if(c.endsWith('_e')) continue;
     var code = c;
     var type = getType(c);
-    var fact = getFactor(c);
+    var fact = getFactor(map, c);
     var unit = getUnit(c, fact)||'';
     z += `${code},${type},${fact},${unit}${os.EOL}`;
   }
