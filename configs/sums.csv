@@ -33,8 +33,12 @@ facn6,f18d2cn6+f20d2n6+f22d2n6+f20d3n6+f20d4n6
 facn6_e,f18d2cn6_e+f20d2n6_e+f22d2n6_e+f20d3n6_e+f20d4n6_e
 facn9,f18d1cn9+f20d1cn9+f22d1cn9+f24d1cn9
 facn9_e,f18d1cn9_e+f20d1cn9_e+f22d1cn9_e+f24d1cn9_e
-famscis,f14d1cn5+f16d1cn7+f18d1cn9+f20d1cn9+f22d1cn9+f24d1cn9
-famscis_e,f14d1cn5_e+f16d1cn7_e+f18d1cn9_e+f20d1cn9_e+f22d1cn9_e+f24d1cn9_e
+facn5,f14d1cn5
+facn5_e,f14d1cn5_e
+facn7,f16d1cn7
+facn7_e,f16d1cn7_e
+facis,facn3+facn6+facn9+facn5+facn7
+facis_e,facn3_e+facn6_e+facn9_e+facn5_e+facn7_e
 fatrn,f18d1tn9
 fatrn_e,f18d1tn9_e
 olsac,rafs+stas+vers+ajgs
