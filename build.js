@@ -37,8 +37,11 @@ var sums = null;
 var orders = null;
 groups.load();
 
-function valParse(val, code) {
-  var z = (parseFloat(val)||0)*factors.get(code);
+function valParse(val, code, dat, i) {
+  var f = factors.get(code);
+  var fn = parseFloat(f.replace(/\*.*/, ''));
+  var fi = f.indexOf('*'), fk = fi>=0? f.substring(fi+1):null;
+  var z = (parseFloat(val)||0)*fn*(fk? parseFloat(dat[fk][i])||0:1);
   return round(z);
 };
 
@@ -73,8 +76,8 @@ function readAssetRow(row) {
     if(BASE.includes(k)) continue;
     var val = row[k].trim().split('±'), kt = renames.get(k)||k;
     if(!dat[kt]) { dat[kt] = []; dat[kt+'_e'] = []; }
-    dat[kt][i] = valParse(val[0]||'0', k);
-    dat[kt+'_e'][i] = valParse(val[1]||'0', k);
+    dat[kt][i] = valParse(val[0]||'0', k, dat, i);
+    dat[kt+'_e'][i] = valParse(val[1]||'0', k, dat, i);
   }
 };
 function readAsset(pth) {
