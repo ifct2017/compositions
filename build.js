@@ -11,6 +11,9 @@ const BASE = ['code', 'name', 'scie', 'lang', 'grup', 'regn', 'tags'];
 function round(val) {
   return Math.round(val*1e+12)/1e+12;
 };
+function significantDigits(n) {
+  return n.toExponential().replace(/e[\+\-0-9]*$/, '').replace( /^0\.?0*|\./, '').length;
+};
 
 function readCsv(pth, fn, acc) {
   return new Promise((fres) => {
@@ -42,6 +45,7 @@ function valParse(val, code, dat, i) {
   var fn = parseFloat(f.replace(/\*.*/, ''));
   var fi = f.indexOf('*'), fk = fi>=0? f.substring(fi+1):null;
   var z = (parseFloat(val)||0)*fn*(fk? parseFloat(dat[fk][i])||0:1);
+  z = parseFloat(z.toExponential((significantDigits(fn)||1)-1));
   return round(z);
 };
 
