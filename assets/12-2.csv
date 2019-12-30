@@ -1,28 +1,3 @@
-# Indian Food Composition Tables 2017
-# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
-#
-# Copyright  © 2017 by National Institute of Nutrition
-# Indian Council of Medical Research
-# Department of Health Research Ministry of Health and Family Welfare, Government of India
-# Jamai Osmania (PO), Hyderabad – 500 007
-# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
-#
-# FATTY ACID PROFILE OF EDIBLE OILS AND FATS
-# (All values are expressed in %; All blank space in the table represent below detectable limit)
-# - Food Code
-# - Oil Name
-# - No. of Regions
-# - Myristoleic (C14:1) [%]
-# - Palmitoleic (C16:1) [%]
-# - Elaidic (C18:1n9t) [%]
-# - Oleic (C18:1n9) [%]
-# - Eicosenoic (C20:1n9) [%]
-# - Erucic (C22:1n9) [%]
-# - Linoleic (C18:2n6) [%]
-# - α-Linolenic (C18:3n3) [%]
-# - Total Saturated Fatty Acids (TSFA) [%]
-# - Total Mono Unsaturated Fatty Acids (TMUFA) [%]
-# - Total Poly Unsaturated Fatty Acids (TPUFA) [%]
 code,name,regn,tf14d1,tf16d1c,tf18d1tn9,tf18d1cn9,tf20d1n9f,tf22d1n9,tf18d2cn6,tf18d3n3,tfasat,tfams,tfapu
 T001,Coconut oil,1,,,,7.24±0.25,,,1.90±0.14,,90.86±0.33,7.24±0.25,1.90±0.14
 T002,Corn oil,1,,1.7,,31.97,,,48.97,0.76,16.6,33.67,49.74

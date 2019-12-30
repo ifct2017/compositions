@@ -1,26 +1,3 @@
-# Indian Food Composition Tables 2017
-# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
-#
-# Copyright  © 2017 by National Institute of Nutrition
-# Indian Council of Medical Research
-# Department of Health Research Ministry of Health and Family Welfare, Government of India
-# Jamai Osmania (PO), Hyderabad – 500 007
-# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
-#
-# FATTY ACID PROFILE
-# (All values are expressed per 100g edible portion; All blank space in the table represent below detectable limit)
-# - Food Code
-# - Food Name
-# - No. of Regions
-# - Oleic (C18:1n9) [mg]
-# - Eicosaenoic (C20:1n9) [mg]
-# - Erucic (C22:1n9) [mg]
-# - Nervonic (C24:1n9) [mg]
-# - Linoleic (C18:2n6) [mg]
-# - Eicosadienoic (C20:2) [mg]
-# - Docosadienoic (C22:2) [mg]
-# - α-Linolenic (C18:3n3) [mg]
-# - Eicosatrienoic (C20:3n6) [mg]
 code,name,regn,f18d1cn9,f20d1n9,f22d1n9,f24d1c,f18d2cn6,f20d2,f22d2,f18d3n3,f20d3n6
 P001,Allathi (Elops machnata),1,108,4.33,,3.19,9.62,1.85,,,1.93
 P002,Aluva (Parastromateus niger),3,199±69.0,18.37±3.56,6.90±1.20,6.69±0.86,19.37±6.06,4.26±0.25,,,2.66±2.31

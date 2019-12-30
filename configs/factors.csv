@@ -1,7 +1,3 @@
-# Conversion factors
-# ------------------
-# code:   Column code
-# factor: Conversion factor (in grams / kcal)
 code,factor
 water,1
 protcnt,1

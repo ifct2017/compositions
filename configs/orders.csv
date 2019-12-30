@@ -1,7 +1,3 @@
-# Column ordering
-# ---------------
-# before: Before column
-# code:   Column
 before,code
 water,enerc
 water,water

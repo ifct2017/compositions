@@ -1,27 +1,3 @@
-# Indian Food Composition Tables 2017
-# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
-#
-# Copyright  © 2017 by National Institute of Nutrition
-# Indian Council of Medical Research
-# Department of Health Research Ministry of Health and Family Welfare, Government of India
-# Jamai Osmania (PO), Hyderabad – 500 007
-# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
-#
-# FATTY ACID PROFILE
-# (All values are expressed per 100g edible portion; All blank space in the table represent below detectable limit)
-# - Food Code
-# - Food Name
-# - No. of Regions
-# - Eicosaenoic (C20:1n9) [mg]
-# - Erucic (C22:1n9) [mg]
-# - Nervonic (C24:1n9) [mg]
-# - Linoleic (C18:2n6) [mg]
-# - Eicosadienoic (C20:2) [mg]
-# - α-Linolenic (C18:3n3) [mg]
-# - Arachidonic (C20:4n6) [mg]
-# - Total Saturated Fatty Acids (TSFA) [mg]
-# - Total Mono Unsaturated Fatty Acids (TMUFA) [mg]
-# - Total Poly Unsaturated Fatty Acids (TPUFA) [mg]
 code,name,regn,f20d1n9f,f22d1n9,f24d1c,f18d2cn6,f20d2,f18d3n3,f20d4n6,fasat,fams,fapu
 A001,"Amaranth seed, black (Amaranthus cruentus)",1,12.62,,,2259,,20.91,,1280,1033,2279
 A002,"Amaranth seed, pale brown (Amaranthus cruentus)",6,12.71±1.56,,,2223±129,,43.03±2.70,,1140±70.5,1043±65.8,2266±132

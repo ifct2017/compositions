@@ -1,28 +1,3 @@
-# Indian Food Composition Tables 2017
-# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
-#
-# Copyright  © 2017 by National Institute of Nutrition
-# Indian Council of Medical Research
-# Department of Health Research Ministry of Health and Family Welfare, Government of India
-# Jamai Osmania (PO), Hyderabad – 500 007
-# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
-#
-# OLIGOSACCHARIDES, PHYTOSTEROLS, PHYTATES AND SAPONINS
-# (All values are expressed per 100g edible portion; All blank space in the table represent below detectable limit)
-# - Food Code
-# - Food Name
-# - No. of Regions
-# + Oligosaccharides
-#   - Raffinose [g]
-#   - Stachyose [g]
-#   - Verbascose [g]
-#   - Ajugose [g]
-# + Phytosterols
-#   - Campesterol [mg]
-#   - Stigmasterol [mg]
-#   - β-Sitosterol [mg]
-#   - Phytate [mg]
-# - Total Saponin [g]
 code,name,regn,rafs,stas,vers,ajgs,camt,stgstr,stostrb,phytac,sapon
 A001,"Amaranth seed, black (Amaranthus cruentus)",1,,,,,1.75,8.24,61.36,393,1.42
 A002,"Amaranth seed, pale brown (Amaranthus cruentus)",6,,,,,1.58±0.15,8.51±0.37,60.15±1.49,341±13.9,1.28±0.21

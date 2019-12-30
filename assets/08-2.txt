@@ -1,0 +1,22 @@
+# Indian Food Composition Tables 2017
+# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
+#
+# Copyright  © 2017 by National Institute of Nutrition
+# Indian Council of Medical Research
+# Department of Health Research Ministry of Health and Family Welfare, Government of India
+# Jamai Osmania (PO), Hyderabad – 500 007
+# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
+#
+# AMINO ACID PROFILE
+# (All values are expressed in g per 100g protein)
+# - Food Code
+# - Food Name
+# - No. of Regions
+# - Alanine [g]
+# - Arginine [g]
+# - Aspartic Acid [g]
+# - Glutamic Acid [g]
+# - Glycine [g]
+# - Proline [g]
+# - Serine [g]
+# - Tyrosine [g]

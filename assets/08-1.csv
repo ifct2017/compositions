@@ -1,27 +1,3 @@
-# Indian Food Composition Tables 2017
-# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
-#
-# Copyright  © 2017 by National Institute of Nutrition
-# Indian Council of Medical Research
-# Department of Health Research Ministry of Health and Family Welfare, Government of India
-# Jamai Osmania (PO), Hyderabad – 500 007
-# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
-#
-# AMINO ACID PROFILE
-# (All values are expressed in g per 100g protein)
-# - Food Code
-# - Food Name
-# - No. of Regions
-# - Histidine [g]
-# - Isoleucine [g]
-# - Luecine [g]
-# - Lysine [g]
-# - Methionine [g]
-# - Cysteine [g]
-# - Phenylalanine [g]
-# - Threonine [g]
-# - Tryptophan [g]
-# - Valine [g]
 code,name,regn,his,ile,leu,lys,met,cys,phe,thr,trp,val
 A001,"Amaranth seed, black (Amaranthus cruentus)",1,1.86,2.82,4.83,5.45,1.86,1.6,3.98,3.02,1.5,4.34
 A002,"Amaranth seed, pale brown (Amaranthus cruentus)",6,1.98±0.50,2.85±0.04,4.94±0.17,5.50±0.35,1.95±0.12,1.51±0.15,4.75±0.41,2.99±0.21,1.69±0.10,4.30±0.27

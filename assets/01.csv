@@ -1,27 +1,3 @@
-# Indian Food Composition Tables 2017
-# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
-#
-# Copyright  © 2017 by National Institute of Nutrition
-# Indian Council of Medical Research
-# Department of Health Research Ministry of Health and Family Welfare, Government of India
-# Jamai Osmania (PO), Hyderabad – 500 007
-# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
-#
-# PROXIMATE PRINCIPLES AND DIETARY FIBRE
-# (All values are expressed per 100g edible portion; All blank space in the table represent below detectable limit)
-# - Food Code
-# - Food Name
-# - No. of Regions
-# - Moisture [g]
-# - Protein [g]
-# - Ash [g]
-# - Total Fat [g]
-# + Dietary Fibre
-#   - Total [g]
-#   - Insoluble [g]
-#   - Soluble [g]
-# - Carbohydrate [g]
-# - Energy [kJ]
 code,name,regn,water,protcnt,ash,fatce,fibtg,fibins,fibsol,choavldf,enerc
 A001,"Amaranth seed, black (Amaranthus cruentus)",1,9.89,14.59,2.78,5.74,7.02,5.76,1.26,59.98,1490
 A002,"Amaranth seed, pale brown (Amaranthus cruentus)",6,9.20±0.40,13.27±0.34,3.05±0.30,5.56±0.33,7.47±0.09,5.80±0.17,1.67±0.21,61.46±0.60,1489±10

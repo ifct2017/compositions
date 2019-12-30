@@ -1,28 +1,3 @@
-# Indian Food Composition Tables 2017
-# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
-#
-# Copyright  © 2017 by National Institute of Nutrition
-# Indian Council of Medical Research
-# Department of Health Research Ministry of Health and Family Welfare, Government of India
-# Jamai Osmania (PO), Hyderabad – 500 007
-# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
-#
-# ORGANIC ACIDS
-# (All values are expressed per 100g edible portion; All blank space in the table represent below detectable limit)
-# - Food Code
-# - Food Name
-# - No. of Regions
-# + Oxalate
-#   - Total [mg]
-#   - Soluble [mg]
-#   - Insoluble [mg]
-# - Cis-Aconitic Acid [mg]
-# - Citric Acid [mg]
-# - Fumaric Acid [mg]
-# - Malic Acid [mg]
-# - Quinic Acid [mg]
-# - Succinic Acid [mg]
-# - Tartaric Acid [mg]
 code,name,regn,oxalt,oxals,oxali,caconac,citac,fumac,malac,quinac,sucac,tarac
 A001,"Amaranth seed, black (Amaranthus cruentus)",1,226,37.43,188,,8.64,0.15,45.78,75.53,1.47,
 A002,"Amaranth seed, pale brown (Amaranthus cruentus)",6,209±49.7,32.30±1.46,177±49.8,0.14±0.02,7.93±0.45,0.14±0.02,47.16±1.64,75.06±0.57,1.89±0.13,

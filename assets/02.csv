@@ -1,25 +1,3 @@
-# Indian Food Composition Tables 2017
-# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
-#
-# Copyright  © 2017 by National Institute of Nutrition
-# Indian Council of Medical Research
-# Department of Health Research Ministry of Health and Family Welfare, Government of India
-# Jamai Osmania (PO), Hyderabad – 500 007
-# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
-#
-# WATER SOLUBLE VITAMINS
-# (All values are expressed per 100g edible portion; All blank space in the table represent below detectable limit)
-# - Food Code
-# - Food Name
-# - No. of Regions
-# - Thiamine (B1) [mg]
-# - Riboflavin (B2) [mg]
-# - Niacin (B3) [mg]
-# - Pantothenic Acid (B5) [mg]
-# - Total B6 [mg]
-# - Biotin (B7) [ug]
-# - Total Folates (B9) [ug]
-# - Total Ascorbic Acid [mg]
 code,name,regn,thia,ribf,nia,pantac,vitb6c,biot,folsum,vitc
 A001,"Amaranth seed, black (Amaranthus cruentus)",1,0.04,0.04,0.45,0.24,0.50,1.92,27.44,
 A002,"Amaranth seed, pale brown (Amaranthus cruentus)",6,0.04±0.007,0.04±0.007,0.52±0.05,0.28±0.03,0.33±0.023,1.87±0.24,24.65±3.21,

@@ -1,0 +1,25 @@
+# Indian Food Composition Tables 2017
+# T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah
+#
+# Copyright  © 2017 by National Institute of Nutrition
+# Indian Council of Medical Research
+# Department of Health Research Ministry of Health and Family Welfare, Government of India
+# Jamai Osmania (PO), Hyderabad – 500 007
+# Telangana, India Phone: +91 40 27197334, Fax: +91 40 27000339, Email: nin@ap.nic.in
+#
+# FATTY ACID PROFILE OF EDIBLE OILS AND FATS
+# (All values are expressed in %; All blank space in the table represent below detectable limit)
+# - Food Code
+# - Oil Name
+# - No. of Regions
+# - Butyric (C4:0) [%]
+# - Caproic (C6:0) [%]
+# - Caprylic (C8:0) [%]
+# - Capric (C10:0) [%]
+# - Lauric (C12:0) [%]
+# - Myristic (C14:0) [%]
+# - Palmitic (C16:0) [%]
+# - Stearic (C18:0) [%]
+# - Arachidic (C20:0) [%]
+# - Behenic (C22:0) [%]
+# - Lignoceric (C24:0) [%]

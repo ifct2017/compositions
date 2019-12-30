@@ -1,0 +1,4 @@
+# Column code map
+# ---------------
+# code:   Table column code
+# actual: Final column code
