@@ -1,6 +1,6 @@
 {
   "name": "@ifct2017/compositions",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Food compositions in Indian Food Composition Tables 2017.",
   "main": "index.js",
   "scripts": {
