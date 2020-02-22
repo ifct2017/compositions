@@ -1,4 +1,6 @@
-[Food compositions] in [Indian Food Composition Tables 2017].
+Detailed [nutrient composition] of 528 key foods in India.
+> This is part of package [ifct2017].<br>
+> Source: [Indian Food Composition Tables 2017].
 
 ```javascript
 const compositions = require('@ifct2017/compositions');
@@ -36,8 +38,9 @@ compositions('gai ka doodh details.');
 > Food composition values were measured by [National Institute of Nutrition, Hyderabad].<br>
 > Take a peek at the raw data here: [Document], [Webpage], [Tables document], [Tables webpage].
 
+[ifct2017]: https://www.npmjs.com/package/ifct2017
 [Indian Food Composition Tables 2017]: http://ifct2017.com/
-[Food compositions]: https://github.com/ifct2017/compositions/blob/master/index.csv
+[nutrient composition]: https://github.com/ifct2017/compositions/blob/master/index.csv
 [ifct2017.github.io]: https://ifct2017.github.io
 [National Institute of Nutrition, Hyderabad]: https://www.nin.res.in/
 [Document]: https://docs.google.com/spreadsheets/d/19C2EB4PIMgyusqKOnBq4-aBQxLjCai1Zg45YcBNTzFo/edit?usp=sharing
