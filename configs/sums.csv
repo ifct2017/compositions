@@ -37,6 +37,8 @@ facis,facn3+facn6+facn9+facn5+facn7
 facis_e,facn3_e+facn6_e+facn9_e+facn5_e+facn7_e
 fatrn,f18d1tn9
 fatrn_e,f18d1tn9_e
+fatce,fasat+fauns
+fatce_e,fasat_e+fauns_e
 olsac,rafs+stas+vers+ajgs
 olsac_e,rafs_e+stas_e+vers_e+ajgs_e
 phystr,camt+stgstr+stostrb

@@ -45,7 +45,7 @@ function valParse(val, code, dat, i) {
   var fn = parseFloat(f.replace(/\*.*/, ''));
   var fi = f.indexOf('*'), fk = fi>=0? f.substring(fi+1):null;
   var z = (parseFloat(val)||0)*fn*(fk? parseFloat(dat[fk][i])||0:1);
-  z = parseFloat(z.toExponential((significantDigits(fn)||1)-1));
+  // z = parseFloat(z.toExponential((significantDigits(parseFloat(val))||1)-1));
   return round(z);
 };
 
@@ -107,9 +107,9 @@ function sumColumns(d, i, ks) {
 };
 function sumAll(d) {
   for(var [k, exp] of sums) {
-    var sumk = exp.replace(/\s/g, '').split('+'); d[k] = [];
+    var sumk = exp.replace(/\s/g, '').split('+'); d[k] = d[k]||[];
     for(var i=0; i<di; i++)
-      d[k][i] = round(sumColumns(d, i, sumk));
+      d[k][i] = d[k][i]||round(sumColumns(d, i, sumk));
   }
 };
 function orderAll(d) {
