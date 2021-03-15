@@ -1,8 +1,8 @@
-const Sql = require('sql-extra');
-const parse = require('csv-parse');
-const lunr = require('lunr');
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
+const lunr = require('lunr');
+const parse = require('csv-parse');
+const esql = require('sql-extra');
 
 const TEXTCOL = new Set(['code', 'name', 'scie', 'lang', 'grup', 'tags']);
 var corpus = new Map();
@@ -85,9 +85,9 @@ function sql(tab='compositions', opt={}) {
     stream.on('end', () => {
       z = insertIntoEnd(z);
       z += createFunctionLangTags(tab);
-      z += Sql.createView(`${tab}_tsvector`, `SELECT *, ${tsv} AS "tsvector" FROM "${tab}"`);
-      z += Sql.createIndex(`${tab}_tsvector_idx`, tab, `(${tsv})`, {method: 'GIN'});
-      z = Sql.setupTable.index(tab, cols, opt, z);
+      z += esql.createView(`${tab}_tsvector`, `SELECT *, ${tsv} AS "tsvector" FROM "${tab}"`);
+      z += esql.createIndex(`${tab}_tsvector_idx`, tab, `(${tsv})`, {method: 'GIN'});
+      z = esql.setupTable.index(tab, cols, opt, z);
       fres(z);
     });
   });

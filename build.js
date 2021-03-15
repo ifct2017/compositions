@@ -8,12 +8,16 @@ const os = require('os');
 const BASE = ['code', 'name', 'scie', 'lang', 'grup', 'regn', 'tags'];
 
 
+
+
 function round(val) {
   return Math.round(val*1e+12)/1e+12;
-};
+}
+
 function significantDigits(n) {
   return n.toExponential().replace(/e[\+\-0-9]*$/, '').replace( /^0\.?0*|\./, '').length;
-};
+}
+
 
 function readCsv(pth, fn, acc) {
   return new Promise((fres) => {
@@ -21,7 +25,10 @@ function readCsv(pth, fn, acc) {
     stream.on('data', (r) => fn(acc, r));
     stream.on('end', () => fres(acc));
   });
-};
+}
+
+
+
 
 var dat = {
   code: [],
@@ -38,7 +45,10 @@ var factors = null;
 var renames = null;
 var sums = null;
 var orders = null;
+var descCorpus;
+var grupCorpus;
 groups.load();
+
 
 function valParse(val, code, dat, i) {
   var f = factors.get(code);
@@ -47,7 +57,8 @@ function valParse(val, code, dat, i) {
   var z = (parseFloat(val)||0)*fn*(fk? parseFloat(dat[fk][i])||0:1);
   // z = parseFloat(z.toExponential((significantDigits(parseFloat(val))||1)-1));
   return round(z);
-};
+}
+
 
 function nameSci(str) {
   var bgn = str.lastIndexOf('(');
@@ -57,12 +68,14 @@ function nameSci(str) {
   var sci = str.substring(bgn+1, end).trim();
   var spc = sci.search(/\s/g);
   return spc>=0 && sci!=='small intestine'? sci:'';
-};
+}
+
 function nameBas(str) {
   var sci = nameSci(str);
   if(!sci) return str.trim();
   return str.replace(new RegExp(`\\(\\s*${sci}\\s*\\)`), '').trim();
-};
+}
+
 function readAssetRow(row) {
   var cod = row.code.trim();
   var old = map.has(cod);
@@ -72,10 +85,10 @@ function readAssetRow(row) {
   dat.code[i] = cod;
   dat.name[i] = old && dat.name[i].length>nam.length? dat.name[i]:nam;
   dat.scie[i] = old && dat.scie[i].length>sci.length? dat.scie[i]:sci;
-  dat.lang[i] = (descriptions.corpus.get(cod)||{desc: ''}).desc;
-  dat.grup[i] = groups.corpus.get(cod[0]).group;
+  dat.lang[i] = (descCorpus.get(cod)||{desc: ''}).desc;
+  dat.grup[i] = grupCorpus.get(cod[0]).group;
   dat.regn[i] = parseInt(row.regn.trim(), 10);
-  dat.tags[i] = groups.corpus.get(cod[0]).tags.trim();
+  dat.tags[i] = grupCorpus.get(cod[0]).tags.trim();
   for(var k in row) {
     if(BASE.includes(k)) continue;
     var val = row[k].trim().split('±'), kt = renames.get(k)||k;
@@ -83,14 +96,18 @@ function readAssetRow(row) {
     dat[kt][i] = valParse(val[0]||'0', k, dat, i);
     dat[kt+'_e'][i] = valParse(val[1]||'0', k, dat, i);
   }
-};
+}
+
 function readAsset(pth) {
   return new Promise((fres) => {
     var stm = fs.createReadStream(pth).pipe(parse({columns: true, comment: '#'}));
     stm.on('data', readAssetRow);
     stm.on('end', () => fres());
   });
-};
+}
+
+
+
 
 function nullToZero(d) {
   var K = Object.keys(d);
@@ -98,20 +115,23 @@ function nullToZero(d) {
     for(var i=0; i<di; i++)
       d[k][i] = d[k][i]!=null? d[k][i]:0;
   }
-};
+}
+
 function sumColumns(d, i, ks) {
   var z = 0;
   for(var k of ks)
     z += d[k][i];
   return z;
-};
+}
+
 function sumAll(d) {
   for(var [k, exp] of sums) {
     var sumk = exp.replace(/\s/g, '').split('+'); d[k] = d[k]||[];
     for(var i=0; i<di; i++)
       d[k][i] = d[k][i]||round(sumColumns(d, i, sumk));
   }
-};
+}
+
 function orderAll(d) {
   var z = {};
   for(var k in d) {
@@ -124,10 +144,14 @@ function orderAll(d) {
     z[k] = d[k];
   }
   return z;
-};
+}
+
+
+
 
 async function build() {
-  await descriptions.load();
+  grupCorpus = groups.load();
+  descCorpus = await descriptions.load();
   factors = await readCsv('configs/factors.csv', (acc, r) => acc.set(r.code, r.factor), new Map());
   renames = await readCsv('configs/renames.csv', (acc, r) => acc.set(r.code, r.actual), new Map());
   sums = await readCsv('configs/sums.csv', (acc, r) => acc.set(r.code, r.expression), new Map());
@@ -150,5 +174,5 @@ async function build() {
     z = z.substring(0, z.length-1)+os.EOL;
   }
   fs.writeFileSync('index.csv', z);
-};
+}
 build();

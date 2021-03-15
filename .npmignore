@@ -1,6 +1,9 @@
-# build
+# Data
 assets/
 configs/
-columns.csv
-factors.csv
+index.txt
+
+# Build
+.travis.yml
 build.js
+tests.js
