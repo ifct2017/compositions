@@ -4,7 +4,7 @@ const lunr = require('lunr');
 const parse = require('csv-parse');
 const esql = require('sql-extra');
 
-const TEXTCOL = new Set(['code', 'name', 'scie', 'lang', 'grup', 'tags']);
+const TEXTCOLS = new Set(['code', 'name', 'scie', 'lang', 'grup', 'tags']);
 var corpus = new Map();
 var index = null;
 var ready = null;
@@ -106,7 +106,7 @@ function sql(tab='compositions', opt={}) {
 function loadRow(row) {
   var a = {};
   for(var k in row) {
-    if(TEXTCOL.has(k)) a[k] = row[k];
+    if(TEXTCOLS.has(k)) a[k] = row[k];
     else a[k] = parseFloat(row[k]);
   }
   return a;

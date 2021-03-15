@@ -1,6 +1,6 @@
 {
   "name": "@ifct2017/compositions",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Detailed nutrient composition of 528 key foods in India.",
   "main": "index.js",
   "scripts": {
