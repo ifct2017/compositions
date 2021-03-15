@@ -9,6 +9,9 @@ var corpus = new Map();
 var index = null;
 var ready = null;
 
+
+
+
 function tsvector(tab, cols) {
   return `setweight(to_tsvector('english', "code"), '${cols.code||'A'}')||`+
   `setweight(to_tsvector('english', left("name", strpos("name", ','))), '${cols.code||'A'}')||`+
@@ -17,7 +20,7 @@ function tsvector(tab, cols) {
   `setweight(to_tsvector('english', ${tab}_lang_tags("lang")), '${cols.lang||'B'}')||`+
   `setweight(to_tsvector('english', "grup"), '${cols.grup||'C'}')||`+
   `setweight(to_tsvector('english', "tags"), '${cols.tags||'C'}')`;
-};
+}
 
 function createFunctionLangTags(tab) {
   return `CREATE OR REPLACE FUNCTION "${tab}_lang_tags" (TEXT) RETURNS TEXT AS $$`+
@@ -25,7 +28,7 @@ function createFunctionLangTags(tab) {
   ` '\\[.*?\\]', '', 'g'), '\\w+\\.\\s([\\w\\'',\\/\\(\\)\\- ]+)[;\\.]?', '\\1', 'g'),`+
   ` '[,\\/\\(\\)\\- ]+', ' ', 'g')) $$`+
   ` LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT;\n`;
-};
+}
 
 function createTable(tab, cols, opt={}, z='') {
   var don = ['code', 'name', 'scie', 'lang', 'grup', 'regn', 'tags'];
@@ -42,7 +45,7 @@ function createTable(tab, cols, opt={}, z='') {
   z = z.endsWith(', ')? z.substring(0, z.length-2):z;
   z += `);\n`;
   return z;
-};
+}
 
 function insertIntoBegin(tab, cols, z='') {
   z += `INSERT INTO "${tab}" (`;
@@ -51,7 +54,7 @@ function insertIntoBegin(tab, cols, z='') {
   z = z.endsWith(', ')? z.substring(0, z.length-2):z;
   z += ') VALUES\n(';
   return z;
-};
+}
 
 function insertIntoMid(val, z='') {
   for(var k in val)
@@ -59,17 +62,17 @@ function insertIntoMid(val, z='') {
   z = z.endsWith(', ')? z.substring(0, z.length-2):z;
   z += `),\n(`;
   return z;
-};
+}
 
 function insertIntoEnd(z='') {
   z = z.endsWith(',\n(')? z.substring(0, z.length-3):z;
   z += ';\n';
   return z;
-};
+}
 
 function csv() {
   return path.join(__dirname, 'index.csv');
-};
+}
 
 function sql(tab='compositions', opt={}) {
   var i = -1, cols = null, z = '';
@@ -91,27 +94,27 @@ function sql(tab='compositions', opt={}) {
       fres(z);
     });
   });
-};
+}
 
 function loadRow(row) {
-  var z = {};
+  var a = {};
   for(var k in row) {
-    if(TEXTCOL.has(k)) z[k] = row[k];
-    else z[k] = parseFloat(row[k]);
+    if(TEXTCOL.has(k)) a[k] = row[k];
+    else a[k] = parseFloat(row[k]);
   }
-  return z;
-};
+  return a;
+}
 
 function loadCorpus() {
   return new Promise((fres) => {
-    var stream = fs.createReadStream(csv()).pipe(parse({columns: true, comment: '#'}));
-    stream.on('data', (r) => corpus.set(r.code, loadRow(r)));
-    stream.on('end', fres);
+    var s = fs.createReadStream(csv()).pipe(parse({columns: true, comment: '#'}));
+    s.on('data', (r) => corpus.set(r.code, loadRow(r)));
+    s.on('end', fres);
   });
-};
+}
 
-function setupIndex() {
-  index = lunr(function() {
+function createIndex() {
+  return lunr(function() {
     this.ref('code');
     this.field('code');
     this.field('name');
@@ -128,25 +131,33 @@ function setupIndex() {
       this.add({code, name, scie, lang, grup, tags});
     }
   });
-};
+}
 
-function load() {
-  ready = ready||loadCorpus();
-  return ready.then(setupIndex);
-};
+async function load() {
+  if (ready) await ready;
+  if (index) return corpus;
+  ready = loadCorpus();
+  await ready;
+  index = createIndex();
+  return corpus;
+}
+
+
+function matchRate(m) {
+  return Object.keys(m.matchData.metadata).length;
+}
 
 function compositions(txt) {
-  if(index==null) return [];
-  var z = [], txt = txt.replace(/\W/g, ' ');
-  var mats = index.search(txt), max = 0;
-  for(var mat of mats)
-    max = Math.max(max, Object.keys(mat.matchData.metadata).length);
-  for(var mat of mats)
-    if(Object.keys(mat.matchData.metadata).length===max) z.push(corpus.get(mat.ref));
-  return z;
-};
+  if (!index) { load(); return []; }
+  var a = [], txt = txt.replace(/\W/g, ' ');
+  var ms = index.search(txt), max = 0;
+  for (var m of ms)
+    max = Math.max(max, matchRate(m));
+  for (var m of ms)
+    if (matchRate(m)===max) a.push(corpus.get(m.ref));
+  return a;
+}
 compositions.csv = csv;
 compositions.sql = sql;
 compositions.load = load;
-compositions.corpus = corpus;
 module.exports = compositions;
