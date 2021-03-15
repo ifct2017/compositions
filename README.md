@@ -1,19 +1,18 @@
 Detailed [nutrient composition] of 528 key foods in India.
+
 > This is part of package [ifct2017].<br>
-> Source: [Indian Food Composition Tables 2017].
+> Online database: [ifct2017.github.io].
+
+<br>
 
 ```javascript
 const compositions = require('@ifct2017/compositions');
-// compositions.corpus: Map {code => {code, name, scie, lang, grup, regn, tags, ...}}
-// compositions.load(): Promise (corpus loaded)
-// compositions.sql([table], [options]): Promise (sql commands)
-// compositions.csv(): path to csv file
-// compositions(<query>)
-// -> [{code, name, scie, lang, grup, regn, tags, ...}] for matched foods
+// compositions(query)
+// → matches [{code, name, scie, lang, grup, regn, tags, ...}]
 
 
 await compositions.load();
-/* load corpus first */
+/// Load corpus first
 
 compositions('pineapple');
 compositions('ananas comosus');
@@ -32,9 +31,19 @@ compositions('gai ka doodh details.');
 //     ... } ]
 ```
 
+```javascript
+// Additional methods:
+compositions.load() // → corpus (promise)
+compositions.sql([table], [options]) // → sql statements (promise)
+compositions.csv() // → path of csv file
+```
 
-[![ifct2017](http://ifct2017.com/ifct_2017.jpg)](https://www.npmjs.com/package/ifct2017)
-> You can ask about composition of 528 key foods in India here: [ifct2017.github.io].<br>
+<br>
+<br>
+
+[![](https://i.imgur.com/D5UYmbD.jpg)](http://ifct2017.com/)
+
+> Data was obtained from the book [Indian Food Composition Tables 2017].<br>
 > Food composition values were measured by [National Institute of Nutrition, Hyderabad].<br>
 > Take a peek at the raw data here: [Document], [Webpage], [Tables document], [Tables webpage].
 
