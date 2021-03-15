@@ -12,14 +12,22 @@ var ready = null;
 
 
 
+function csv() {
+  return path.join(__dirname, 'index.csv');
+}
+
+
+
+
 function tsvector(tab, cols) {
-  return `setweight(to_tsvector('english', "code"), '${cols.code||'A'}')||`+
-  `setweight(to_tsvector('english', left("name", strpos("name", ','))), '${cols.code||'A'}')||`+
-  `setweight(to_tsvector('english', "name"), '${cols.name||'B'}')||`+
-  `setweight(to_tsvector('english', "scie"), '${cols.scie||'B'}')||`+
-  `setweight(to_tsvector('english', ${tab}_lang_tags("lang")), '${cols.lang||'B'}')||`+
-  `setweight(to_tsvector('english', "grup"), '${cols.grup||'C'}')||`+
-  `setweight(to_tsvector('english', "tags"), '${cols.tags||'C'}')`;
+  var {code, name, scie, lang, grup, tags} = cols;
+  return `setweight(to_tsvector('english', "code"), '${code}')||`+
+  `setweight(to_tsvector('english', left("name", strpos("name", ','))), '${code}')||`+
+  `setweight(to_tsvector('english', "name"), '${name}')||`+
+  `setweight(to_tsvector('english', "scie"), '${scie}')||`+
+  `setweight(to_tsvector('english', ${tab}_lang_tags("lang")), '${lang}')||`+
+  `setweight(to_tsvector('english', "grup"), '${grup}')||`+
+  `setweight(to_tsvector('english', "tags"), '${tags}')`;
 }
 
 function createFunctionLangTags(tab) {
@@ -30,71 +38,70 @@ function createFunctionLangTags(tab) {
   ` LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT;\n`;
 }
 
-function createTable(tab, cols, opt={}, z='') {
-  var don = ['code', 'name', 'scie', 'lang', 'grup', 'regn', 'tags'];
-  z += `CREATE TABLE IF NOT EXISTS "${tab}" (`;
-  for(var col of don) {
-    var typ = col==='regn'? 'INT':'TEXT';
-    z += ` "${col}" ${typ} NOT NULL,`;
+function createTable(tab, cols, opt={}, a='') {
+  var pre = ['code', 'name', 'scie', 'lang', 'grup', 'regn', 'tags'];
+  a += `CREATE TABLE IF NOT EXISTS "${tab}" (`;
+  for(var c of pre) {
+    var typ = c==='regn'? 'INT':'TEXT';
+    a += ` "${c}" ${typ} NOT NULL,`;
   }
-  for(var k in cols) {
-    if(don.includes(k)) continue;
-    z += ` "${k}" REAL NOT NULL,`;
+  for(var c in cols) {
+    if(pre.includes(c)) continue;
+    a += ` "${c}" REAL NOT NULL,`;
   }
-  if(opt.pk) z += ` PRIMARY KEY ("code"), `;
-  z = z.endsWith(', ')? z.substring(0, z.length-2):z;
-  z += `);\n`;
-  return z;
+  if(opt.pk) a += ` PRIMARY KEY ("code"), `;
+  a = a.endsWith(', ')? a.substring(0, a.length-2) : a;
+  a += `);\n`;
+  return a;
 }
 
-function insertIntoBegin(tab, cols, z='') {
-  z += `INSERT INTO "${tab}" (`;
-  for(var col in cols)
-    z += `"${col}", `;
-  z = z.endsWith(', ')? z.substring(0, z.length-2):z;
-  z += ') VALUES\n(';
-  return z;
+function insertIntoBegin(tab, cols, a='') {
+  a += `INSERT INTO "${tab}" (`;
+  for(var c in cols)
+    a += `"${c}", `;
+  a = a.endsWith(', ')? a.substring(0, a.length-2) : a;
+  a += ') VALUES\n(';
+  return a;
 }
 
-function insertIntoMid(val, z='') {
+function insertIntoMid(val, a='') {
   for(var k in val)
-    z += `'${val[k]}', `;
-  z = z.endsWith(', ')? z.substring(0, z.length-2):z;
-  z += `),\n(`;
-  return z;
+    a += `'${val[k]}', `;
+  a = a.endsWith(', ')? a.substring(0, a.length-2) : a;
+  a += `),\n(`;
+  return a;
 }
 
-function insertIntoEnd(z='') {
-  z = z.endsWith(',\n(')? z.substring(0, z.length-3):z;
-  z += ';\n';
-  return z;
-}
-
-function csv() {
-  return path.join(__dirname, 'index.csv');
+function insertIntoEnd(a='') {
+  a = a.endsWith(',\n(')? a.substring(0, a.length-3) : a;
+  a += ';\n';
+  return a;
 }
 
 function sql(tab='compositions', opt={}) {
-  var i = -1, cols = null, z = '';
+  var i = -1, cols = null, a = '';
   var opt = Object.assign({pk: 'code', index: true}, opt);
   var tsv = tsvector(tab, {code: 'A', name: 'B', scie: 'B', lang: 'B', grup: 'C', tags: 'C'});
   var stream = fs.createReadStream(csv()).pipe(parse({columns: true, comment: '#'}));
   return new Promise((fres, frej) => {
     stream.on('error', frej);
     stream.on('data', (r) => {
-      if(++i===0) { cols = r; z = createTable(tab, cols, opt, z); z = insertIntoBegin(tab, cols, z); }
-      z = insertIntoMid(r, z);
+      if(++i===0) { cols = r; a = createTable(tab, cols, opt, a); a = insertIntoBegin(tab, cols, a); }
+      a = insertIntoMid(r, a);
     });
     stream.on('end', () => {
-      z = insertIntoEnd(z);
-      z += createFunctionLangTags(tab);
-      z += esql.createView(`${tab}_tsvector`, `SELECT *, ${tsv} AS "tsvector" FROM "${tab}"`);
-      z += esql.createIndex(`${tab}_tsvector_idx`, tab, `(${tsv})`, {method: 'GIN'});
-      z = esql.setupTable.index(tab, cols, opt, z);
-      fres(z);
+      a = insertIntoEnd(a);
+      a += createFunctionLangTags(tab);
+      a += esql.createView(`${tab}_tsvector`, `SELECT *, ${tsv} AS "tsvector" FROM "${tab}"`);
+      a += esql.createIndex(`${tab}_tsvector_idx`, tab, `(${tsv})`, {method: 'GIN'});
+      a = esql.setupTable.index(tab, cols, opt, a);
+      fres(a);
     });
   });
 }
+
+
+
 
 function loadRow(row) {
   var a = {};
@@ -143,6 +150,8 @@ async function load() {
 }
 
 
+
+
 function matchRate(m) {
   return Object.keys(m.matchData.metadata).length;
 }
@@ -157,7 +166,7 @@ function compositions(txt) {
     if (matchRate(m)===max) a.push(corpus.get(m.ref));
   return a;
 }
+compositions.load = load;
 compositions.csv = csv;
 compositions.sql = sql;
-compositions.load = load;
 module.exports = compositions;
