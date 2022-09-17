@@ -1,13 +1,14 @@
-const fs = require('fs');
+const fs   = require('fs');
 const path = require('path');
 const lunr = require('lunr');
-const parse = require('csv-parse');
+const csvx = require('csv-parse');
 const esql = require('sql-extra');
 
 const TEXTCOLS = new Set(['code', 'name', 'scie', 'lang', 'grup', 'tags']);
+
 var corpus = new Map();
-var index = null;
-var ready = null;
+var index  = null;
+var ready  = null;
 
 
 
@@ -41,15 +42,15 @@ function createFunctionLangTags(tab) {
 function createTable(tab, cols, opt={}, a='') {
   var pre = ['code', 'name', 'scie', 'lang', 'grup', 'regn', 'tags'];
   a += `CREATE TABLE IF NOT EXISTS "${tab}" (`;
-  for(var c of pre) {
+  for (var c of pre) {
     var typ = c==='regn'? 'INT':'TEXT';
     a += ` "${c}" ${typ} NOT NULL,`;
   }
-  for(var c in cols) {
-    if(pre.includes(c)) continue;
+  for (var c in cols) {
+    if (pre.includes(c)) continue;
     a += ` "${c}" REAL NOT NULL,`;
   }
-  if(opt.pk) a += ` PRIMARY KEY ("code"), `;
+  if (opt.pk) a += ` PRIMARY KEY ("code"), `;
   a = a.endsWith(', ')? a.substring(0, a.length-2) : a;
   a += `);\n`;
   return a;
@@ -57,7 +58,7 @@ function createTable(tab, cols, opt={}, a='') {
 
 function insertIntoBegin(tab, cols, a='') {
   a += `INSERT INTO "${tab}" (`;
-  for(var c in cols)
+  for (var c in cols)
     a += `"${c}", `;
   a = a.endsWith(', ')? a.substring(0, a.length-2) : a;
   a += ') VALUES\n(';
@@ -65,7 +66,7 @@ function insertIntoBegin(tab, cols, a='') {
 }
 
 function insertIntoMid(val, a='') {
-  for(var k in val)
+  for (var k in val)
     a += `'${val[k]}', `;
   a = a.endsWith(', ')? a.substring(0, a.length-2) : a;
   a += `),\n(`;
@@ -82,20 +83,20 @@ function sql(tab='compositions', opt={}) {
   var i = -1, cols = null, a = '';
   var opt = Object.assign({pk: 'code', index: true}, opt);
   var tsv = tsvector(tab, {code: 'A', name: 'B', scie: 'B', lang: 'B', grup: 'C', tags: 'C'});
-  var stream = fs.createReadStream(csv()).pipe(parse({columns: true, comment: '#'}));
-  return new Promise((fres, frej) => {
-    stream.on('error', frej);
+  var stream = fs.createReadStream(csv()).pipe(csvx.parse({columns: true, comment: '#'}));
+  return new Promise((resolve, reject) => {
+    stream.on('error', reject);
     stream.on('data', (r) => {
-      if(++i===0) { cols = r; a = createTable(tab, cols, opt, a); a = insertIntoBegin(tab, cols, a); }
+      if (++i===0) { cols = r; a = createTable(tab, cols, opt, a); a = insertIntoBegin(tab, cols, a); }
       a = insertIntoMid(r, a);
     });
     stream.on('end', () => {
-      a = insertIntoEnd(a);
+      a  = insertIntoEnd(a);
       a += createFunctionLangTags(tab);
       a += esql.createView(`${tab}_tsvector`, `SELECT *, ${tsv} AS "tsvector" FROM "${tab}"`);
       a += esql.createIndex(`${tab}_tsvector_idx`, tab, `(${tsv})`, {method: 'GIN'});
-      a = esql.setupTable.index(tab, cols, opt, a);
-      fres(a);
+      a  = esql.setupTable.index(tab, cols, opt, a);
+      resolve(a);
     });
   });
 }
@@ -105,8 +106,8 @@ function sql(tab='compositions', opt={}) {
 
 function loadRow(row) {
   var a = {};
-  for(var k in row) {
-    if(TEXTCOLS.has(k)) a[k] = row[k];
+  for (var k in row) {
+    if (TEXTCOLS.has(k)) a[k] = row[k];
     else a[k] = parseFloat(row[k]);
   }
   return a;
@@ -114,7 +115,7 @@ function loadRow(row) {
 
 function loadCorpus() {
   return new Promise((fres) => {
-    var s = fs.createReadStream(csv()).pipe(parse({columns: true, comment: '#'}));
+    var s = fs.createReadStream(csv()).pipe(csvx.parse({columns: true, comment: '#'}));
     s.on('data', (r) => corpus.set(r.code, loadRow(r)));
     s.on('end', fres);
   });
@@ -129,7 +130,7 @@ function createIndex() {
     this.field('lang');
     this.field('grup');
     this.field('tags');
-    for(var r of corpus.values()) {
+    for (var r of corpus.values()) {
       var {code, name, scie, lang, grup, tags} = r;
       name = name.replace(/^(\w+),/g, '$1 $1 $1 $1,');
       lang = lang.replace(/\[.*?\]/g, '');
@@ -158,7 +159,7 @@ function matchRate(m) {
 
 function compositions(txt) {
   if (!index) { load(); return []; }
-  var a = [], txt = txt.replace(/\W/g, ' ');
+  var a  = [], txt = txt.replace(/\W/g, ' ');
   var ms = index.search(txt), max = 0;
   for (var m of ms)
     max = Math.max(max, matchRate(m));
@@ -167,6 +168,6 @@ function compositions(txt) {
   return a;
 }
 compositions.load = load;
-compositions.csv = csv;
-compositions.sql = sql;
+compositions.csv  = csv;
+compositions.sql  = sql;
 module.exports = compositions;
