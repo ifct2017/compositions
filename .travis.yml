@@ -1,9 +1,0 @@
-language: node_js
-node_js:
-  - "node"
-before_install:
-- git clone https://${GITHUB_TOKEN}@github.com/nodef/deploy "$HOME/deploy"
-- chmod 777 "$HOME/deploy/"*.sh
-- bash "$HOME/deploy/before_install.sh"
-script:
-- bash "$HOME/deploy/script.sh"

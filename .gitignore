@@ -1,5 +1,9 @@
-## Output
-## ------
+# Generated files
+.build/
+.docs/
+coverage/
+*.map
+example.js
 corpus.js
 
 

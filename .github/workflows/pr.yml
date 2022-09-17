@@ -1,0 +1,21 @@
+name: PR
+on: [pull_request]
+env:
+  FORCE_COLOR: 1
+
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, windows-latest, macOS-latest]
+        node: [16.x, 18.x]
+    name: Test with Node ${{ matrix.node }} on ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm test

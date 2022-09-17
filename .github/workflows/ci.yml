@@ -1,0 +1,78 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - '!*'  # Do not execute on tags
+env:
+  GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+  CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+  FORCE_COLOR: 1
+
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, windows-latest, macOS-latest]
+        node: [16.x, 18.x]
+    name: Test with Node ${{matrix.node}} on ${{matrix.platform}}
+    runs-on: ${{matrix.platform}}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - run: npm ci
+      - run: npm test
+
+
+  # coverage:
+  #   name: Publish coverage
+  #   needs: [test]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v2
+  #       with:
+  #         node-version: 18.x
+  #     - run: npm ci
+  #     - run: npm test
+  #     - uses: paambaati/codeclimate-action@v3.0.0
+  #     - uses: coverallsapp/github-action@master
+  #       with:
+  #         github-token: ${{secrets.GITHUB_TOKEN}}
+
+
+  docs:
+    name: Publish docs
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+      - run: git clone https://${GITHUB_TOKEN}@github.com/ifct2017/deploy "$HOME/deploy"
+      - run: bash "$HOME/deploy/setup.sh"
+      - run: npm i -g typescript typedoc
+      - run: npm ci
+      - run: npm run publish-docs
+
+
+  packages:
+    name: Publish packages
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+      - run: git clone https://${GITHUB_TOKEN}@github.com/ifct2017/deploy "$HOME/deploy"
+      - run: bash "$HOME/deploy/setup.sh"
+      - run: npm i -g typescript rollup typedoc browserify terser
+      - run: npm ci
+      - run: npm run publish-packages

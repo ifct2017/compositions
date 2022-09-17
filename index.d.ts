@@ -445,7 +445,7 @@ export function load(): Promise<Map<string, Composition>>;
  * [📦](https://www.npmjs.com/package/@ifct2017/compositions)
  * @returns CREATE TABLE, INSERT, CREATE VIEW, CREATE INDEX statements
  */
- export function sql(tab: string='compositions', opt: object={}): Promise<string>;
+export function sql(tab: string='compositions', opt: object={}): Promise<string>;
 
 
 /**
