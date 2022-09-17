@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Sahu
+    given-names: Subhajit
+    orcid: https://orcid.org/0000-0001-5140-6578
+title: "ifct2017/compositions: Detailed nutrient composition of 528 key foods in India"
+version: 2.0.5
+doi: 10.5281/zenodo.7088590
+date-released: 2022-09-17
