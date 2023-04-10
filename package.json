@@ -40,6 +40,7 @@
   },
   "homepage": "https://github.com/ifct2017/compositions#readme",
   "devDependencies": {
+    "@ifct2017/columns": "^2.0.13",
     "@ifct2017/descriptions": "^2.0.7",
     "@ifct2017/groups": "^2.0.11",
     "extra-build": "^2.2.29"

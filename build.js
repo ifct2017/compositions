@@ -3,7 +3,8 @@ const fs    = require('fs');
 const os    = require('os');
 const build = require('extra-build');
 const csv   = require('csv-parse');
-const descriptions = require('@ifct2017/descriptions')
+const columns      = require('@ifct2017/columns');
+const descriptions = require('@ifct2017/descriptions');
 const groups       = require('@ifct2017/groups');
 
 const owner = 'ifct2017';
@@ -150,7 +151,8 @@ async function generateIndexCsv() {
 
 
   async function main() {
-    grupCorpus = groups.load();
+    await columns.load();
+    grupCorpus = await groups.load();
     descCorpus = await descriptions.load();
     factors = await readCsv('configs/factors.csv', (acc, r) => acc.set(r.code, r.factor),     new Map());
     renames = await readCsv('configs/renames.csv', (acc, r) => acc.set(r.code, r.actual),     new Map());
@@ -166,7 +168,7 @@ async function generateIndexCsv() {
     sumAll(dat);
     dat = orderAll(dat);
     var ks = Object.keys(dat);
-    var a  = ks.join() + os.EOL;
+    var a  = ks.map(k => `"${columns(k.replace(/_e$/, ''))[0].name}; ${k}"`).join() + os.EOL;
     for (var i=0; i<di; i++) {
       for (var k of ks) {
         var v = dat[k][i];
