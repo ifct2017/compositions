@@ -87,8 +87,9 @@ function sql(tab='compositions', opt={}) {
   return new Promise((resolve, reject) => {
     stream.on('error', reject);
     stream.on('data', (r) => {
-      if (++i===0) { cols = r; a = createTable(tab, cols, opt, a); a = insertIntoBegin(tab, cols, a); }
-      a = insertIntoMid(r, a);
+      var x = fixColumns(r);
+      if (++i===0) { cols = x; a = createTable(tab, cols, opt, a); a = insertIntoBegin(tab, cols, a); }
+      a = insertIntoMid(x, a);
     });
     stream.on('end', () => {
       a  = insertIntoEnd(a);
@@ -104,11 +105,24 @@ function sql(tab='compositions', opt={}) {
 
 
 
-function loadRow(row) {
+// Fix column names of a row in the CSV file.
+function fixColumns(row) {
   var a = {};
   for (var k in row) {
-    if (TEXTCOLS.has(k)) a[k] = row[k];
-    else a[k] = parseFloat(row[k]);
+    // Name of column is after the last semicolon.
+    var l = k.substring(k.lastIndexOf(';')+1).trim();
+    a[l]  = row[k];
+  }
+  return a;
+}
+
+
+// Parse a row from the CSV file.
+function parseRow(row) {
+  var a = {};
+  for (var k in row) {
+    var l = k.substring(k.lastIndexOf(';')+1).trim();
+    a[l]  = TEXTCOLS.has(l)? row[k] : parseFloat(row[k]);
   }
   return a;
 }
@@ -116,7 +130,7 @@ function loadRow(row) {
 function loadCorpus() {
   return new Promise((fres) => {
     var s = fs.createReadStream(csv()).pipe(csvx.parse({columns: true, comment: '#'}));
-    s.on('data', (r) => corpus.set(r.code, loadRow(r)));
+    s.on('data', (r) => { var x = parseRow(r); corpus.set(x.code, x); });
     s.on('end', fres);
   });
 }
